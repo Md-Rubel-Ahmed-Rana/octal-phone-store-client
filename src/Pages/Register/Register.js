@@ -1,11 +1,31 @@
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthProvider";
+import swal from 'sweetalert';
+import { useNavigate } from "react-router-dom";
+
 
  const Register = () => {
+     const { createUser } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate()
+
+
     const onSubmit = (data) => {
+        handleRegister(data.email, data.password)
         console.log(data);
     }
 
+    const handleRegister = (email, password) => {
+        createUser(email, password)
+        .then((result) => {
+            const user = result.user;
+            swal("Good", "Registered successfully", "success");
+            navigate("/login")
+            console.log(user);
+        })
+        .catch((err) => console.log(err))
+    }
 
     return (
         <div className="bg-black lg:py-10">

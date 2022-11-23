@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 import logo from "../../images/logo.png"
 
 const Navbar = () => {
+    const {user} = useContext(AuthContext);
+    console.log(user);
     return (
         <div className='lg:flex justify-between items-center lg:px-20 py-2 px-4 bg-blue-800 text-white'>
             <div className='flex items-center justify-center gap-3'>
@@ -16,10 +19,17 @@ const Navbar = () => {
             <div>
                 <ul className='flex gap-4'>
                     <li> <Link>Home</Link> </li>
-                    <li> <Link>My Products</Link> </li>
-                    <li> <Link>Add Product</Link> </li>
-                    <li> <Link to="/register">Register</Link> </li>
-                    <li> <Link to="/login">Login</Link> </li>
+                    {
+                        user?.uid ? <>
+                            <li> <Link>My Products</Link> </li>
+                            <li> <Link>Add Product</Link> </li>
+                            <li> <Link to="/login">Logout</Link> </li>
+                        </> : <>
+                                <li> <Link to="/register">Register</Link> </li>
+                                <li> <Link to="/login">Login</Link> </li>
+                        </>
+                    }
+                    
                 </ul>
             </div>
         </div>

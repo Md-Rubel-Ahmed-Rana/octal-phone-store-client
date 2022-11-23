@@ -1,11 +1,32 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+import { AuthContext } from "../../contexts/AuthProvider";
+
 
 const Login = () => {
+    const { loginUser, setUser } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate()
+
+
     const onSubmit = (data) => {
+        handleLogin(data.email, data.password)
         console.log(data);
     }
 
+    const handleLogin = (email, password) => {
+        loginUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                setUser(user)
+                swal("Great!", "Logged in successfully", "success");
+                navigate("/")
+                console.log(user);
+            })
+            .catch((err) => console.log(err))
+    }
 
     return (
         <div className="bg-black lg:py-10">
