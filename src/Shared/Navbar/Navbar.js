@@ -4,10 +4,10 @@ import logo from "../../images/logo.png"
 
 const Navbar = () => {
     return (
-        <div className='flex justify-between items-center px-20 py-2 bg-blue-800 text-white'>
-            <div className='flex items-center gap-3'>
+        <div className='lg:flex justify-between items-center lg:px-20 py-2 px-4 bg-blue-800 text-white'>
+            <div className='flex items-center justify-center gap-3'>
                 <img className='w-14 h-14 rounded-full' src={logo} alt="logo" />
-                <h2 className='lg:text-2xl font-bold'>Octal Phone Store</h2>
+                <h2 className='text-2xl font-bold'>Octal Phone Store</h2>
             </div>
             <div>
                 <ul className='flex gap-4'>
