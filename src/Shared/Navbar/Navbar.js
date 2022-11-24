@@ -26,7 +26,7 @@ const Navbar = () => {
             </div>
             <div>
                 <ul className='lg:flex lg:gap-4 grid grid-cols-4 gap-2'>
-                    <li> <Link>Home</Link> </li>
+                    <li> <Link to="/">Home</Link> </li>
                     {
                         user?.uid ? <>
                             <li> <Link>My Products</Link> </li>
