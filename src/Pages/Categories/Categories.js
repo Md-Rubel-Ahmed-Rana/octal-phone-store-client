@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { AuthContext } from '../../contexts/AuthProvider';
 import swal from 'sweetalert';
+import axios from 'axios';
 
 const Categories = () => {
     const {user} = useContext(AuthContext)
@@ -19,9 +20,16 @@ const Categories = () => {
         const phoneNumber = form.number.value;
         const location = form.location.value;
 
-        const orderInfo = { buyerName, email, phoneName, price, phoneNumber, location };
-        console.log(orderInfo);
-        swal("Great!", "Confirmed your order", "success");
+        axios.post("http://localhost:5000/orders", {
+            buyerName, email, phoneName, price, phoneNumber, location
+        })
+        .then(()=> {
+            swal("Great!", "Confirmed your order", "success");
+        })
+        .catch((error) => {
+                console.log(error);
+        });
+       
     }
 
     return (
@@ -37,6 +45,7 @@ const Categories = () => {
                             <p className='mb-1'>Original Price: {product?.originalPrice}</p>
                             <p className='mb-2'>Resale Price: {product?.resalePrice}</p>
                             <p className='mb-2'>Resale Price: {product?.usedTime}</p>
+                            <p className='mb-2'>Condition: {product?.condition}</p>
                             <p className='mb-2'>Post: {product?.postedTime}</p>
                             <p className='mb-2'>Location: {product?.location}</p>
                             <div className='mb-2 flex items-center gap-4'> <span>Seller: {product?.seller}</span> <span>{product?.isVerified === "yes" ? <span ><FaCheckCircle className='text-green-500' /></span> : <FaTimesCircle className='text-red-500' />}</span> </div>
