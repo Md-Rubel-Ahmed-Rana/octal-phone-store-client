@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
     const navigate = useNavigate()
 
 
-    const onSubmit = (data) => {
+    const handleRegister = (data) => {
         createUser(data.email, data.password)
             .then(() => {
                 const userInfo = {
@@ -19,7 +19,16 @@ import { useNavigate } from "react-router-dom";
                     email: data.email,
                     role: data.role
                 }
-                console.log(userInfo);
+                fetch("http://localhost:5000/users", {
+                    method: "POST",
+                    headers: {
+                        "content-type":"application/json"
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                .then((res) => res.json())
+                .then((result) => console.log(result))
+                .catch((err) => console.log(err))
                 setUser(userInfo)
                 swal("Good", "Registered successfully", "success");
                 logout()
@@ -41,7 +50,7 @@ import { useNavigate } from "react-router-dom";
     return (
         <div className="bg-black lg:py-10">
             <div className="lg:w-1/2 bg-gray-800 mx-auto text-center lg:px-20 py-10 rounded-md">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(handleRegister)}>
                     <div className="mb-3">
                         <input className="p-2 w-2/3" {...register("name")} placeholder="Name" />
                     </div>
@@ -50,7 +59,7 @@ import { useNavigate } from "react-router-dom";
                     </div>
                     <div className="mb-3">
                         <select className="p-2 w-2/3" {...register("role")}>
-                            <option value="user">buyer</option>
+                            <option value="buyer">buyer</option>
                             <option value="seller">seller</option>
                         </select>
                     </div>
