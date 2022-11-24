@@ -19,7 +19,7 @@ const DashboardLayout = () => {
     return (
         <div>
             <Navbar />
-            <div className="drawer drawer-mobile">
+            <div className="drawer drawer-mobile  px-20 py-10">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
                     <Outlet />
@@ -29,13 +29,13 @@ const DashboardLayout = () => {
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
                         {
                             currenUser.role === "admin" ? <>
-                                <li> <Link>All Buyers</Link> </li>
+                                <li> <Link to="/dashboard/allbuyers">All Buyers</Link> </li>
                                 <li> <Link>All Sellers</Link> </li>
                             </> : <> 
                                     {
                                         currenUser.role === "seller" ? <>
                                             <li> <Link to="/dashboard/addProduct">Add A Product</Link> </li>
-                                            <li> <Link>My Buyers</Link> </li>
+                                            <li> <Link to="/dashboard/allbuyers">My Buyers</Link> </li>
                                         </> : <li> <Link>My Orders</Link> </li>
                                     }
                                 </> 
