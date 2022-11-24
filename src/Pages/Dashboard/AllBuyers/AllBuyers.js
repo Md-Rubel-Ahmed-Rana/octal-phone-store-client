@@ -13,7 +13,7 @@ const AllBuyers = () => {
         }
     })
 
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ["users", currenUser],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/users?role=${currenUser?.role}`)
@@ -21,9 +21,23 @@ const AllBuyers = () => {
             return data;
         }
     })
-
     const buyers = users.filter((user) => user.role === "buyer");
-    console.log(buyers);
+
+
+    const handleDeleteUser = (email) => {
+        fetch(`http://localhost:5000/users/${email}`, {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            refetch()
+        })
+        .catch((err) => console.log(err))
+    }
 
     return (
             <div className="overflow-x-auto">
@@ -44,7 +58,7 @@ const AllBuyers = () => {
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
                                 <td>{buyer.role}</td>
-                                <td><button className='bg-red-500 px-2 py-1 text-white rounded'>Delete</button></td>
+                                <td><button onClick={() => handleDeleteUser(buyer.email)} className='bg-red-500 px-2 py-1 text-white rounded'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>
