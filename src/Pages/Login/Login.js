@@ -20,7 +20,22 @@ const Login = () => {
         loginWithGoogle()
             .then((result) => {
                 const user = result.user;
-                console.log(user);
+                const userInfo = {
+                    name: user.displayName,
+                    email: user.email,
+                    role: "buyer"
+                }
+                console.log(userInfo);
+                fetch("http://localhost:5000/users", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                .then((res) => res.json())
+                .then((result) => console.log(result))
+                .catch((err) => console.log(err))
                 swal("Great!", "Logged in successfully", "success");
             })
             .catch((err) => console.log(err))
