@@ -29,8 +29,6 @@ const Navbar = () => {
                     <li> <Link to="/">Home</Link> </li>
                     {
                         user?.uid ? <>
-                            <li> <Link>My Products</Link> </li>
-                            <li> <Link>Add Product</Link> </li>
                             <li> <Link to="/dashboard">Dashboard</Link> </li>
                             <li onClick={handleLogout}> <Link>Logout</Link> </li>
                         </> : <>

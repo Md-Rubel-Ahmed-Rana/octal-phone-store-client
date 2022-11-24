@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AllSellers = () => {
@@ -33,8 +34,8 @@ const AllSellers = () => {
             }
         })
             .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
+            .then(() => {
+                swal("Done", "Seller deleted successfully", "success");
                 refetch()
             })
             .catch((err) => console.log(err))

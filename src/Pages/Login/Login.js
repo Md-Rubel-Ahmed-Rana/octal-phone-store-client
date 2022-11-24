@@ -10,10 +10,15 @@ const Login = () => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
 
-
     const onSubmit = (data) => {
-        handleLogin(data.email, data.password)
-        console.log(data);
+        loginUser(data.email, data.password)
+            .then((result) => {
+                const user = result.user;
+                setUser(user)
+                swal("Great!", "Logged in successfully", "success");
+                navigate("/")
+            })
+            .catch((err) => console.log(err))
     }
 
     const handleLoginWithGoogle = () => {
@@ -25,7 +30,6 @@ const Login = () => {
                     email: user.email,
                     role: "buyer"
                 }
-                console.log(userInfo);
                 fetch("http://localhost:5000/users", {
                     method: "POST",
                     headers: {
@@ -34,21 +38,9 @@ const Login = () => {
                     body: JSON.stringify(userInfo)
                 })
                 .then((res) => res.json())
-                .then((result) => console.log(result))
+                .then(() => swal("Great!", "Logged in successfully", "success"))
                 .catch((err) => console.log(err))
-                swal("Great!", "Logged in successfully", "success");
-            })
-            .catch((err) => console.log(err))
-    }
-
-    const handleLogin = (email, password) => {
-        loginUser(email, password)
-            .then((result) => {
-                const user = result.user;
-                setUser(user)
-                swal("Great!", "Logged in successfully", "success");
-                navigate("/")
-                console.log(user);
+                
             })
             .catch((err) => console.log(err))
     }

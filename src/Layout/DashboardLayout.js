@@ -34,8 +34,9 @@ const DashboardLayout = () => {
                             </> : <> 
                                     {
                                         currenUser.role === "seller" ? <>
-                                            <li> <Link to="/dashboard/addProduct">Add A Product</Link> </li>
-                                            <li> <Link to="/dashboard/allbuyers">My Buyers</Link> </li>
+                                            <li> <Link>My Products</Link> </li>
+                                            <li> <Link to="/dashboard/addProduct">Add Product</Link> </li>
+                                            <li> <Link to="/dashboard/mybuyers">My Buyers</Link> </li>
                                         </> : <li> <Link>My Orders</Link> </li>
                                     }
                                 </> 
