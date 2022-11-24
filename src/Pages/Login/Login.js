@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 
 
 const Login = () => {
-    const { loginUser, setUser } = useContext(AuthContext)
+    const { loginUser, setUser, loginWithGoogle } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
 
@@ -14,6 +14,16 @@ const Login = () => {
     const onSubmit = (data) => {
         handleLogin(data.email, data.password)
         console.log(data);
+    }
+
+    const handleLoginWithGoogle = () => {
+        loginWithGoogle()
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                swal("Great!", "Logged in successfully", "success");
+            })
+            .catch((err) => console.log(err))
     }
 
     const handleLogin = (email, password) => {
@@ -42,6 +52,7 @@ const Login = () => {
                         <input className="bg-blue-800 w-full px-5 py-2 rounded text-white cursor-pointer" type="submit" value="Login" />
                     </div>
                 </form>
+                <button onClick={handleLoginWithGoogle} className="text-white mt-4 cursor-pointer bg-gray-600 py-2 border rounded-xl w-2/3 mx-auto px-10">Login with Google</button>
             </div>
         </div>
     );

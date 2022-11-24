@@ -6,23 +6,34 @@ import { useNavigate } from "react-router-dom";
 
 
  const Register = () => {
-     const { createUser } = useContext(AuthContext)
+     const { createUser, loginWithGoogle, logout, setUser } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
 
 
     const onSubmit = (data) => {
-        handleRegister(data.email, data.password)
-        console.log(data);
+        createUser(data.email, data.password)
+            .then(() => {
+                const userInfo = {
+                    name: data.name,
+                    email: data.email,
+                    role: data.role
+                }
+                console.log(userInfo);
+                setUser(userInfo)
+                swal("Good", "Registered successfully", "success");
+                logout()
+                navigate("/login")
+            })
+            .catch((err) => console.log(err))
     }
 
-    const handleRegister = (email, password) => {
-        createUser(email, password)
+    const handleLoginWithGoogle = () => {
+        loginWithGoogle()
         .then((result) => {
             const user = result.user;
-            swal("Good", "Registered successfully", "success");
-            navigate("/login")
             console.log(user);
+            swal("Great!", "Logged in successfully", "success");
         })
         .catch((err) => console.log(err))
     }
@@ -39,8 +50,8 @@ import { useNavigate } from "react-router-dom";
                     </div>
                     <div className="mb-3">
                         <select className="p-2 w-2/3" {...register("role")}>
-                            <option value="user">User</option>
-                            <option value="seller">Seller</option>
+                            <option value="user">buyer</option>
+                            <option value="seller">seller</option>
                         </select>
                     </div>
                     <div>
@@ -50,6 +61,7 @@ import { useNavigate } from "react-router-dom";
                         <input className="bg-blue-800 w-full px-5 py-2 rounded text-white cursor-pointer" type="submit" value="Register" />
                     </div>
                 </form>
+                <button onClick={handleLoginWithGoogle} className="text-white mt-4 cursor-pointer bg-gray-600 py-2 border rounded-xl w-2/3 mx-auto px-10">Login with Google</button>
             </div>
         </div>
     );
