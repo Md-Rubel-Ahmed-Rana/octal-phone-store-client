@@ -8,7 +8,7 @@ import axios from 'axios';
 const Categories = () => {
     const {user} = useContext(AuthContext)
     const products = useLoaderData();
-    const [modalData, setModalData] = useState({})
+    const [modalData, setModalData] = useState({});
     
     const handleConfirmation = (event) => {
         event.preventDefault()
@@ -33,18 +33,18 @@ const Categories = () => {
     }
 
     return (
-        <div className='bg-black px-20 py-10 relative'>
-            <div className='flex justify-between'>
+        <div className='bg-black lg:px-20 py-10 relative'>
+            <div className='grid  lg:grid-cols-3 gap-10'>
                 {
-                    products.map((product, index) =><div className='flex rounded-md w-full m-1 bg-gray-800 p-4 gap-3 text-white' key={index}>
-                        <div>
-                            <img className='h-52 w-40' src={product.img} alt="" />
+                    products.map((product, index) =><div className='rounded-md w-full m-1 bg-gray-800 p-4 gap-3 text-white' key={index}>
+                        <div className='mb-4'>
+                            <img className='h-48 rounded w-full' src={product.img} alt="" />
                         </div>
                         <div>
                             <h2 className="text-2xl text-white mb-2">{product?.name}</h2>
                             <p className='mb-1'>Original Price: {product?.originalPrice}</p>
                             <p className='mb-2'>Resale Price: {product?.resalePrice}</p>
-                            <p className='mb-2'>Resale Price: {product?.usedTime}</p>
+                            <p className='mb-2'>Used Time: {product?.usedTime}</p>
                             <p className='mb-2'>Condition: {product?.condition}</p>
                             <p className='mb-2'>Post: {product?.postedTime}</p>
                             <p className='mb-2'>Location: {product?.location}</p>

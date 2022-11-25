@@ -7,8 +7,9 @@ import Navbar from '../Shared/Navbar/Navbar';
 
 const DashboardLayout = () => {
     const {user} = useContext(AuthContext)
+
     const { data: currenUser = [] } = useQuery({
-        queryKey: ["users", user],
+        queryKey: ["user", user],
         queryFn: async() => {
             const res = await fetch(`http://localhost:5000/users/${user?.email}`)
             const data = await res.json()
@@ -34,7 +35,7 @@ const DashboardLayout = () => {
                             </> : <> 
                                     {
                                         currenUser.role === "seller" ? <>
-                                            <li> <Link>My Products</Link> </li>
+                                            <li> <Link to="/dashboard/myproducts">My Products</Link> </li>
                                             <li> <Link to="/dashboard/addProduct">Add Product</Link> </li>
                                             <li> <Link to="/dashboard/mybuyers">My Buyers</Link> </li>
                                         </> : <li> <Link>My Orders</Link> </li>

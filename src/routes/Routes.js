@@ -5,6 +5,7 @@ import Categories from "../Pages/Categories/Categories";
 import AddProduct from "../Pages/Dashboard/AddAProduct/AddProduct";
 import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers/AllSellers";
+import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/category/:id",
-                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`) ,
+                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`) ,
                 element: <Categories />
             },
         ]
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/allsellers",
                 element: <AllSellers />
+            },
+            {
+                path: "/dashboard/myproducts",
+                // loader: ({ params }) => fetch(`http://localhost:5000/myproducts/${params.email}`),
+                element: <MyProducts /> 
             },
         ]
     }
