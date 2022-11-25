@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
  const Register = () => {
-     const { createUser, loginWithGoogle, logout, setUser } = useContext(AuthContext)
+     const { createUser, loginWithGoogle, logout, setUser, updateUser } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
 
@@ -29,7 +29,14 @@ import { useNavigate } from "react-router-dom";
                 .then((res) => res.json())
                 .then((result) => console.log(result))
                 .catch((err) => console.log(err))
-                setUser(userInfo)
+                setUser(userInfo);
+                // update user
+                updateUser(data.name)
+                .then((result) => {
+                    console.log(result.user);
+                })
+                .catch((err) => console.log(err))
+                
                 swal("Good", "Registered successfully", "success");
                 logout()
                 navigate("/login")
