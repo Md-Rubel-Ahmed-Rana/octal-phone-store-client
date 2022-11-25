@@ -19,9 +19,10 @@ const Categories = () => {
         const price = form.price.value;
         const phoneNumber = form.number.value;
         const location = form.location.value;
+        const image = form.img.value;
 
         axios.post("http://localhost:5000/orders", {
-            buyerName, email, phoneName, price, phoneNumber, location
+            buyerName, email, phoneName, price, phoneNumber, location, image
         })
         .then(()=> {
             swal("Great!", "Confirmed your order", "success");
@@ -68,6 +69,9 @@ const Categories = () => {
                         <br />
                         <br />
                         <input className='p-2 w-full' defaultValue={modalData?.resalePrice} type="text" name="price" id="price" readOnly />
+                        <br />
+                        <br />
+                        <input className='p-2 w-full' defaultValue={modalData.img} type="text" name="img" id="img" readOnly />
                         <br />
                         <br />
                         <input className='p-2 w-full' name='number' id='number' type="text" placeholder='Phone Number' required />

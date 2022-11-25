@@ -38,7 +38,10 @@ const Login = () => {
                     body: JSON.stringify(userInfo)
                 })
                 .then((res) => res.json())
-                .then(() => swal("Great!", "Logged in successfully", "success"))
+                .then(() => {
+                    swal("Great!", "Logged in successfully", "success")
+                    navigate("/")
+                })
                 .catch((err) => console.log(err))
                 
             })
