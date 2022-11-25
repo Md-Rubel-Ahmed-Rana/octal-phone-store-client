@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MyOrders = () => {
@@ -9,8 +10,6 @@ const MyOrders = () => {
         axios.get(`http://localhost:5000/myOrders?email=${user?.email}`)
         .then((data) => setMyOrders(data.data))
     }, [user?.email])
-
-    console.log(myOrders);
 
     return (
         <div>
@@ -41,7 +40,7 @@ const MyOrders = () => {
                                 <td>{order.phoneName}</td>
                                 <td>{order.price}</td>
                                 <th>
-                                    <button className="btn btn-primary btn-xs">Pay</button>
+                                    <Link to={`/dashboard/payment/${order._id}`}> <button className="btn btn-primary btn-xs">Pay</button></Link>
                                 </th>
                             </tr>)
                         }
