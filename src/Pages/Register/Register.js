@@ -29,7 +29,6 @@ import { useNavigate } from "react-router-dom";
                 .then((res) => res.json())
                 .then((result) => console.log(result))
                 .catch((err) => console.log(err))
-
                 setUser(userInfo)
                 swal("Good", "Registered successfully", "success");
                 logout()
@@ -47,7 +46,6 @@ import { useNavigate } from "react-router-dom";
                 email: user.email,
                 role: "buyer"
             }
-            console.log(userInfo);
             fetch("http://localhost:5000/users", {
                 method: "POST",
                 headers: {
