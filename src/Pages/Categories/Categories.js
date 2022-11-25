@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Categories = () => {
     const {user} = useContext(AuthContext)
-    const {products} = useLoaderData();
+    const products = useLoaderData();
     const [modalData, setModalData] = useState({})
     
     const handleConfirmation = (event) => {
@@ -79,7 +79,7 @@ const Categories = () => {
                                 <label htmlFor="confirm-modal" className="btn">Cancel</label>
                             </div>
                             <div>
-                                <button type="submit"><label htmlFor="confirm-modal" className='btn btn-primary mt-5'>Confirm</label></button>
+                                <button className='btn btn-primary mt-5' type="submit">Confirm</button>
                             </div>
                         </div>
                     </form>
