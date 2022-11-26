@@ -1,10 +1,11 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+// import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
+import swal from 'sweetalert';
 
-const CheckoutForm = ({ product }) => {
+const CheckoutForm = ({ phone }) => {
     const stripe = useStripe();
     const elements = useElements()
-
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -25,7 +26,7 @@ const CheckoutForm = ({ product }) => {
             return;
         }
 
-        fetch(`http://localhost:5000/cartData/${product._id}`, {
+        fetch(`http://localhost:5000/orders/${phone._id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
@@ -33,12 +34,13 @@ const CheckoutForm = ({ product }) => {
             body: JSON.stringify({ transactionId: paymentMethod.id })
         })
             .then((res) => res.json())
-            .then((data) => console.log(data))
+            .then(() => {
+                swal("Congrates!", "Payment completed", "success")
+            })
             .catch((err) => console.log(err))
     }
     return (
         <div className='w-96'>
-            <h2 className='text-xl'>Please pay for: {product.productName}</h2>
             <form className='my-4' onSubmit={handleSubmit}>
                 <CardElement
                     options={{

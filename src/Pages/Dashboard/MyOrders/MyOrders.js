@@ -40,7 +40,9 @@ const MyOrders = () => {
                                 <td>{order.phoneName}</td>
                                 <td>{order.price}</td>
                                 <th>
-                                    <Link to={`/dashboard/payment/${order._id}`}> <button className="btn btn-primary btn-xs">Pay</button></Link>
+                                    {
+                                        order.paid ? "Paid" : <Link to={`/dashboard/payment/${order._id}`}> <button className="btn btn-primary btn-xs">Pay</button></Link>
+                                    }
                                 </th>
                             </tr>)
                         }

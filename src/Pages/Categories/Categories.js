@@ -49,7 +49,7 @@ const Categories = () => {
                             <p className='mb-2'>Condition: {product?.condition}</p>
                             <p className='mb-2'>Post: {product?.postedTime}</p>
                             <p className='mb-2'>Location: {product?.location}</p>
-                            <div className='mb-2 flex items-center gap-4'> <span>Seller: {product?.seller}</span> <span>{product?.isVerified === "yes" ? <span ><FaCheckCircle className='text-green-500' /></span> : <FaTimesCircle className='text-red-500' />}</span> </div>
+                            <div className='mb-2 flex items-center gap-4'> <span>Seller: {product?.seller}</span> <span>{product?.isVerified ? <span ><FaCheckCircle className='text-green-500' /></span> : <FaTimesCircle className='text-red-500' />}</span> </div>
                             <button onClick={() => setModalData(product)} ><label htmlFor="confirm-modal" className="btn">Buy Now</label></button>
                         </div>
                     </div>)

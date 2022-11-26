@@ -23,6 +23,7 @@ const DashboardLayout = () => {
             <div className="drawer drawer-mobile  px-20 py-10">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
+                    <h3 className="text-4xl mb-4 text-center">Welcome to Dashboard</h3>
                     <Outlet />
                 </div>
                 <div className="drawer-side">
