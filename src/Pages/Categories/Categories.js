@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext,  useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -9,7 +9,7 @@ const Categories = () => {
     const {user} = useContext(AuthContext)
     const products = useLoaderData();
     const [modalData, setModalData] = useState({});
-    
+
     const handleConfirmation = (event) => {
         event.preventDefault()
         const form = event.target;

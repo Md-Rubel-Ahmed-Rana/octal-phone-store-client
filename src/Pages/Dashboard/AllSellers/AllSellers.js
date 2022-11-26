@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import React, { useContext } from 'react';
+import { FaCheckCircle } from 'react-icons/fa';
 import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
@@ -41,6 +43,18 @@ const AllSellers = () => {
             .catch((err) => console.log(err))
     }
 
+
+    // updated seller in users collection
+    const handleVerify = (seller) => {
+        axios.put(`http://localhost:5000/users/sellers/${seller._id}`)
+        .then(() => {
+            // update seller in products collection
+            axios.put("http://localhost:5000/products/sellers")
+            .then((data) => console.log(data))
+        })
+        .catch((err) => console.log(err))
+    }
+
     return (
         <div className="overflow-x-auto">
             <table className="table w-full">
@@ -49,18 +63,20 @@ const AllSellers = () => {
                         <th></th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Position</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        sellers.map((buyer, index) => <tr key={buyer._id}>
+                        sellers.map((seller, index) => <tr key={seller._id}>
                             <th>{index + 1}</th>
-                            <td>{buyer.name}</td>
-                            <td>{buyer.email}</td>
-                            <td>{buyer.role}</td>
-                            <td><button onClick={() => handleDeleteUser(buyer.email)} className='bg-red-500 px-2 py-1 text-white rounded'>Delete</button></td>
+                            <td>{seller.name}</td>
+                            <td>{seller.email}</td>
+                            <td>{seller.role}</td>
+                            <td>{seller.isVerified ? <FaCheckCircle className='text-green-500 text-2xl' />  : <button onClick={() => handleVerify(seller)}className='bg-red-500 text-white rounded p-1'>Unverified</button> }</td>
+                            <td><button onClick={() => handleDeleteUser(seller.email)} className='bg-red-500 px-2 py-1 text-white rounded'>Delete</button></td>
                         </tr>)
                     }
                 </tbody>
