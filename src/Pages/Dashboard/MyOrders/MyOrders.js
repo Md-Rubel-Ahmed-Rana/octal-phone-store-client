@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loader from '../../../Shared/Loader/Loader';
 
 const MyOrders = () => {
     const {user} = useContext(AuthContext)
@@ -10,6 +11,10 @@ const MyOrders = () => {
         axios.get(`http://localhost:5000/myOrders?email=${user?.email}`)
         .then((data) => setMyOrders(data.data))
     }, [user?.email])
+
+    if (myOrders.length === 0) {
+        return <Loader />
+    }
 
     return (
         <div>

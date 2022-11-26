@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios"
 import { Link } from 'react-router-dom';
+import Loader from '../../../Shared/Loader/Loader';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -9,6 +10,10 @@ const Products = () => {
         axios.get("http://localhost:5000/categories")
             .then((data) => setProducts(data.data))
     }, [])
+
+    if (products.length === 0){
+        return <Loader />
+    }
 
     return (
         <div className='py-5 bg-gray-800 my-5 rounded-md'>

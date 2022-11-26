@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loader from '../../../Shared/Loader/Loader';
 
 const AllSellers = () => {
     const { user } = useContext(AuthContext)
@@ -53,6 +54,10 @@ const AllSellers = () => {
             .then((data) => console.log(data))
         })
         .catch((err) => console.log(err))
+    }
+
+    if (sellers.length === 0) {
+        return <Loader />
     }
 
     return (

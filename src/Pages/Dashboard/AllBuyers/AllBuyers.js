@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loader from '../../../Shared/Loader/Loader';
 
 const AllBuyers = () => {
     const { user } = useContext(AuthContext)
@@ -38,6 +39,10 @@ const AllBuyers = () => {
             refetch()
         })
         .catch((err) => console.log(err))
+    }
+
+    if (buyers.length === 0){
+        <Loader />
     }
 
     return (

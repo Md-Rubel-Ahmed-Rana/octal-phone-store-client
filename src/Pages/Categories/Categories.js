@@ -5,11 +5,16 @@ import { AuthContext } from '../../contexts/AuthProvider';
 import swal from 'sweetalert';
 import axios from 'axios';
 import wishList from "../../images/wishlist.png"
+import Loader from '../../Shared/Loader/Loader';
 
 const Categories = () => {
     const {user} = useContext(AuthContext)
     const products = useLoaderData();
     const [modalData, setModalData] = useState({});
+
+    if (products.length === 0) {
+        return <Loader />
+    }
 
     const handleConfirmation = (event) => {
         event.preventDefault()

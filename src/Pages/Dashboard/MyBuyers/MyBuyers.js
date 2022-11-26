@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Loader from '../../../Shared/Loader/Loader';
 
 const MyBuyers = () => {
     const [buyers, setBuyers] = useState([])
@@ -8,6 +9,10 @@ const MyBuyers = () => {
             .then((data) => setBuyers(data.data))
     }, [])
     
+    if (buyers.length === 0){
+        return <Loader />
+    }
+
     return (
         <div className="overflow-x-auto">
             <table className="table w-full">

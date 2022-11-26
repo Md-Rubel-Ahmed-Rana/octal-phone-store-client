@@ -10,8 +10,10 @@ const Payment = () => {
 
     return (
         <div>
-            <h4 className='text-3xl'>Payment for: {phone.phoneName}</h4>
-            <p>Please pay <strong>{phone.price}</strong> for your Phone.</p>
+            {
+                phone.phoneName ? <h4 className='text-3xl font-bold'>Payment for: {phone.phoneName}</h4> : ""
+            }
+            <p className='text-2xl'>Please pay <strong>{phone.price}</strong> for your Phone.</p>
             <div className='w-96 my-10'>
                 <Elements stripe={stripePromise}>
                     <CheckoutForm phone={phone} />

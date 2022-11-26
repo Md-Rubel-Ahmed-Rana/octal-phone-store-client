@@ -5,6 +5,7 @@ import { AuthContext } from '../contexts/AuthProvider';
 import Footer from '../Shared/Footer/Footer';
 import Navbar from '../Shared/Navbar/Navbar';
 
+
 const DashboardLayout = () => {
     const {user} = useContext(AuthContext)
 
@@ -23,7 +24,7 @@ const DashboardLayout = () => {
             <div className="drawer drawer-mobile  px-20 py-10">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
-                    <h3 className="text-4xl mb-4 text-center">Welcome to Dashboard</h3>
+                    <h3 className="lg:text-4xl text-2xl mb-4 text-center">Welcome to Dashboard</h3>
                     <Outlet />
                 </div>
                 <div className="drawer-side">

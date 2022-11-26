@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../../../Shared/Loader/Loader';
 
 const MyWishlist = () => {
     const [products, setProducts] = useState([]);
@@ -8,6 +9,10 @@ const MyWishlist = () => {
         axios.get(`http://localhost:5000/wishlist`)
             .then((data) => setProducts(data.data))
     }, [])
+
+    if (products.length === 0){
+        return <Loader />
+    }
 
     return (
         <div>
