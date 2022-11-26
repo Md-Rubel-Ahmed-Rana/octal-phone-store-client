@@ -4,6 +4,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { AuthContext } from '../../contexts/AuthProvider';
 import swal from 'sweetalert';
 import axios from 'axios';
+import wishList from "../../images/wishlist.png"
 
 const Categories = () => {
     const {user} = useContext(AuthContext)
@@ -33,6 +34,12 @@ const Categories = () => {
        
     }
 
+    const handleWishList = (product) => {
+        console.log(product);
+        axios.post("http://localhost:5000/wishlist", product )
+            .then(() => swal("Cool!", "Added in your Wishlist", "success"))
+    }
+
     return (
         <div className='bg-black lg:px-20 py-10 relative'>
             <div className='grid  lg:grid-cols-3 gap-10'>
@@ -50,7 +57,12 @@ const Categories = () => {
                             <p className='mb-2'>Post: {product?.postedTime}</p>
                             <p className='mb-2'>Location: {product?.location}</p>
                             <div className='mb-2 flex items-center gap-4'> <span>Seller: {product?.seller}</span> <span>{product?.isVerified ? <span ><FaCheckCircle className='text-green-500' /></span> : <FaTimesCircle className='text-red-500' />}</span> </div>
-                            <button onClick={() => setModalData(product)} ><label htmlFor="confirm-modal" className="btn">Buy Now</label></button>
+                            <div className='flex justify-between items-center'>
+                                <button onClick={() => setModalData(product)} ><label htmlFor="confirm-modal" className="btn">Buy Now</label></button>
+                                <div>
+                                    <img onClick={() => handleWishList(product)} className='h-8 w-10 rounded cursor-pointer' src={wishList} alt="" />
+                                </div>
+                            </div>
                         </div>
                     </div>)
                 }
