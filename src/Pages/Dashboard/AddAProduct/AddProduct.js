@@ -66,7 +66,7 @@ const AddProduct = () => {
     }
     return (
             <form onSubmit={handleSubmit(onSubmit)} >
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid lg:grid-cols-2 gap-2">
                     <div>
                         <input placeholder='Product Name (Samsung 10)' className="p-2 w-full border" type="text" {...register("name")} />
                     </div>
@@ -86,7 +86,7 @@ const AddProduct = () => {
                         <input placeholder='Used Time' className="p-2 w-full border" type="text" {...register("usedTime")} />
                     </div>
                     <div>
-                        <input placeholder='Today Date (dd-mm-yyy)' className="p-2 w-full border" type="text" {...register("postedTime")} />
+                        <input placeholder='Today Date (dd-mm-yyyy)' className="p-2 w-full border" type="text" {...register("postedTime")} />
                     </div>
                     <div>
                         <input placeholder='Seller Name' className="p-2 w-full border" type="text" {...register("sellerName")} />
@@ -101,7 +101,7 @@ const AddProduct = () => {
                         <input placeholder='Condition {excelent or good or fair}' className="p-2 w-full border" type="text" {...register("condition")} />
                     </div>
                 </div>
-                <div className="w-full mx-auto mt-3 block text-center">
+                <div className="w-full mx-auto mt-3 lg:mb-5 mb-20 block text-center">
                     <input className="bg-blue-800 w-full px-5 py-2 rounded text-white cursor-pointer" type="submit" value="Add Product" />
                 </div>
             </form>
