@@ -17,7 +17,14 @@ const Login = () => {
             .then((result) => {
                 const user = result.user;
                 setUser(user)
-                swal("Great!", "Logged in successfully", "success");
+                
+                // generate a secret token 
+                fetch(`http://localhost:5000/jwt?email=${user.email}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    localStorage.setItem("accessToken", data.accessToken)
+                    swal("Great!", "Logged in successfully", "success");
+                })
                 navigate(from, {replace: true})
             })
             .catch((err) => console.log(err))

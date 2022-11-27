@@ -31,6 +31,8 @@ const AddProduct = () => {
                     categoryId = "3"
                 } else if (data.name.toLowerCase().includes("huawei")) {
                     categoryId = "4"
+                }else{
+                    return swal("Sorry", "Your brand is not allowed. Try with Apple Samsung Oppo and Huawei", "warning");
                 }
 
                 const name = data.name

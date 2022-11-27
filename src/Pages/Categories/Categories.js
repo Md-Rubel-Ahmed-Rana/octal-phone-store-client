@@ -43,6 +43,7 @@ const Categories = () => {
 
     // store wishlist data in MongoDB
     const handleWishList = (product) => {
+        product.userEmail = user.email;
         axios.post("http://localhost:5000/wishlist", product )
             .then(() => swal("Cool!", "Product added in your Wishlist", "success"))
     }

@@ -8,10 +8,6 @@ const MyBuyers = () => {
         axios.get("http://localhost:5000/buyers")
             .then((data) => setBuyers(data.data))
     }, [])
-    
-    if (buyers.length === 0){
-        return <Loader />
-    }
 
     return (
         <div className="overflow-x-auto">
@@ -28,7 +24,7 @@ const MyBuyers = () => {
                 </thead>
                 <tbody>
                     {
-                        buyers.map((buyer, index) => <tr key={buyer._id}>
+                        buyers.length === 0 ? <Loader /> : buyers.map((buyer, index) => <tr key={buyer._id}>
                             <th>{index + 1}</th>
                             <td>{buyer.buyerName}</td>
                             <td>{buyer.phoneName}</td>
