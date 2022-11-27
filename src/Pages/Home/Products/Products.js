@@ -11,16 +11,12 @@ const Products = () => {
             .then((data) => setProducts(data.data))
     }, [])
 
-    if (products.length === 0){
-        return <Loader />
-    }
-
     return (
         <div className='py-5 bg-gray-800 my-5 rounded-md'>
             <h3 className="text-2xl text-center mb-5">Select your best Brand</h3>
             <div className='lg:flex px-5 gap-10 mx-auto text-center'>
                 {
-                    products.map((product) => <Link to={`/category/${product.category_id}`} key={product._id}> <div className='shadow-xl bg-slate-600 p-3 m-3 rounded cursor-pointer'>
+                    products.length === 0 ? <Loader /> : products.map((product) => <Link to={`/category/${product.category_id}`} key={product._id}> <div className='shadow-xl bg-slate-600 p-3 m-3 rounded cursor-pointer'>
                         <img className='h-40 lg:w-60 w-full rounded' src={product.img} alt="" />
                         <h3 className="text-2xl text-white">{product.name}</h3>
                     </div></Link>)

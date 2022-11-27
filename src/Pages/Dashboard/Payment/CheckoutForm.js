@@ -1,9 +1,11 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 // import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 
 const CheckoutForm = ({ phone }) => {
+    const navigate = useNavigate()
     const stripe = useStripe();
     const elements = useElements()
     const handleSubmit = async (event) => {
@@ -35,7 +37,8 @@ const CheckoutForm = ({ phone }) => {
         })
             .then((res) => res.json())
             .then(() => {
-                swal("Congrates!", "Payment completed", "success")
+                swal("Congrates!", "Payment completed", "success");
+                navigate("/dashboard/myorders")
             })
             .catch((err) => console.log(err))
     }

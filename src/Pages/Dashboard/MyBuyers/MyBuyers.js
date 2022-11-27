@@ -20,6 +20,7 @@ const MyBuyers = () => {
                     <tr>
                         <th></th>
                         <th>Name</th>
+                        <th>Product</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Location</th>
@@ -30,6 +31,7 @@ const MyBuyers = () => {
                         buyers.map((buyer, index) => <tr key={buyer._id}>
                             <th>{index + 1}</th>
                             <td>{buyer.buyerName}</td>
+                            <td>{buyer.phoneName}</td>
                             <td>{buyer.email}</td>
                             <td>{buyer.phoneNumber}</td>
                             <td>{buyer.location}</td>

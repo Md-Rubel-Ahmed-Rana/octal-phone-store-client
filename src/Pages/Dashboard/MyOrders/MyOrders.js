@@ -12,47 +12,45 @@ const MyOrders = () => {
         .then((data) => setMyOrders(data.data))
     }, [user?.email])
 
-    if (myOrders.length === 0) {
-        return <Loader />
-    }
-
     return (
         <div>
             <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            myOrders.map((order, index) => <tr key={index}>
-                                <th>{index + 1}</th>
-                                <td>
-                                    <div className="flex items-center space-x-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src={order.image} alt="" />
+                {
+                    myOrders.length === 0 ? <Loader /> : <table className="table w-full">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                myOrders.map((order, index) => <tr key={index}>
+                                    <th>{index + 1}</th>
+                                    <td>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={order.image} alt="" />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>{order.phoneName}</td>
-                                <td>{order.price}</td>
-                                <th>
-                                    {
-                                        order.paid ? "Paid" : <Link to={`/dashboard/payment/${order._id}`}> <button className="btn btn-primary btn-xs">Pay</button></Link>
-                                    }
-                                </th>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
+                                    </td>
+                                    <td>{order.phoneName}</td>
+                                    <td>{order.price}</td>
+                                    <th>
+                                        {
+                                            order.paid ? "Paid" : <Link to={`/dashboard/payment/${order._id}`}> <button className="btn btn-primary btn-xs">Pay</button></Link>
+                                        }
+                                    </th>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+                }
             </div>
         </div>
     );

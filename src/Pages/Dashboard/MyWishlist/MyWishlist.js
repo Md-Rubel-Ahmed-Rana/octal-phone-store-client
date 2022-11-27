@@ -10,45 +10,43 @@ const MyWishlist = () => {
             .then((data) => setProducts(data.data))
     }, [])
 
-    if (products.length === 0){
-        return <Loader />
-    }
-
     return (
         <div>
             <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            products.map((product, index) => <tr key={index}>
-                                <th>{index + 1}</th>
-                                <td>
-                                    <div className="flex items-center space-x-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src={product.img} alt="" />
+                {
+                    products.length === 0 ? <Loader /> : <table className="table w-full">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                products.map((product, index) => <tr key={index}>
+                                    <th>{index + 1}</th>
+                                    <td>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={product.img} alt="" />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>{product.name}</td>
-                                <td>{product.resalePrice}</td>
-                                <th>
-                                    <Link to={`/dashboard/payment/${product._id}`}> <button className="btn btn-primary btn-xs">Pay</button></Link>
-                                </th>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
+                                    </td>
+                                    <td>{product.name}</td>
+                                    <td>{product.resalePrice}</td>
+                                    <th>
+                                        <Link to={`/dashboard/payment/${product._id}`}> <button className="btn btn-primary btn-xs">Pay</button></Link>
+                                    </th>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+                }
             </div>
         </div>
     );
