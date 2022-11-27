@@ -15,6 +15,7 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ErrorPage from "../Shared/ErrorPage/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
             {
                 path: "/category/:id",
                 loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`) ,
-                element: <Categories />
+                element: <PrivateRoute> <Categories /> </PrivateRoute>
             },
         ]
     },

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthContext } from "../../contexts/AuthProvider";
 
@@ -8,7 +8,9 @@ import { AuthContext } from "../../contexts/AuthProvider";
 const Login = () => {
     const { loginUser, setUser, loginWithGoogle } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/"
 
     const onSubmit = (data) => {
         loginUser(data.email, data.password)
@@ -16,7 +18,7 @@ const Login = () => {
                 const user = result.user;
                 setUser(user)
                 swal("Great!", "Logged in successfully", "success");
-                navigate("/")
+                navigate(from, {replace: true})
             })
             .catch((err) => console.log(err))
     }
@@ -40,7 +42,7 @@ const Login = () => {
                 .then((res) => res.json())
                 .then(() => {
                     swal("Great!", "Logged in successfully", "success")
-                    navigate("/")
+                    navigate(from, { replace: true })
                 })
                 .catch((err) => console.log(err))
                 

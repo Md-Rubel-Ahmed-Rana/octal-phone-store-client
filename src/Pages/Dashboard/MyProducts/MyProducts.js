@@ -1,31 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
-// import { useLoaderData } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    // const [products, setProducts] = useState([])
-    // const myProducts = useLoaderData()
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/myproducts/${user?.email}`)
-    //     .then((res) => res.json())
-    //         .then((data) => setProducts(...products,data))
-    // }, [user?.email, products])
-
-    const {data: myProducts = []} = useQuery({
+    
+    const {data: products = []} = useQuery({
         queryKey: ["products", user?.email],
-        queryFn: async() => {
-            const res = await fetch(`http://localhost:5000/myproducts/${user?.email}`);
-            // const res = await fetch(`http://localhost:5000/myproducts/stave@jobs.com`);
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/myproducts/${user?.email}`)
             const data = await res.json();
             return data
         }
-    })
+    }) 
 
-
-
-    console.log(myProducts);
+    console.log(products);
 
     return (
         <div>

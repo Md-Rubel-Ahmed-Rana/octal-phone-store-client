@@ -42,11 +42,10 @@ const AddProduct = () => {
                 const postedTime = data.postedTime
                 const sellerName = data.sellerName
                 const sellerEmail = data.sellerEmail
-                const isVerified = data.isVerified
                 const condition = data.condition
 
 
-                const product = { name, category_id: categoryId, img, location, originalPrice, resalePrice, usedTime, postedTime, seller: sellerName, sellerEmail, isVerified, condition }
+                const product = { name, category_id: categoryId, img, location, originalPrice, resalePrice, usedTime, postedTime, seller: sellerName, sellerEmail, isVerified: false, condition }
 
                 fetch("http://localhost:5000/products", {
                     method: "POST",
@@ -71,7 +70,7 @@ const AddProduct = () => {
                         <input placeholder='Product Name (Samsung 10)' className="p-2 w-full border" type="text" {...register("name")} />
                     </div>
                     <div>
-                        <input placeholder='image url' className="p-2 w-full  border" type="file" {...register("image")} />
+                        <input className="p-2 w-full  border" type="file" {...register("image")} />
                     </div>
                     <div>
                         <input placeholder='Location' className="p-2 w-full border" type="text" {...register("location")} />
@@ -89,13 +88,10 @@ const AddProduct = () => {
                         <input placeholder='Today Date (dd-mm-yyyy)' className="p-2 w-full border" type="text" {...register("postedTime")} />
                     </div>
                     <div>
-                        <input placeholder='Seller Name' className="p-2 w-full border" type="text" {...register("sellerName")} />
+                        <input defaultValue={user?.displayName} placeholder='Seller Name' className="p-2 w-full border" type="text" {...register("sellerName")} />
                     </div>
                     <div>
                         <input defaultValue={user?.email} placeholder='Seller Email' className="p-2 w-full border" type="text" {...register("sellerEmail")} readOnly />
-                    </div>
-                    <div>
-                        <input placeholder='Is Verified {yes, or no}' className="p-2 w-full border" type="text" {...register("isVerified")} />
                     </div>
                     <div>
                         <input placeholder='Condition {excelent or good or fair}' className="p-2 w-full border" type="text" {...register("condition")} />

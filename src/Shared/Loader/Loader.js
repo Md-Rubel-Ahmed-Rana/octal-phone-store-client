@@ -5,8 +5,6 @@ const Loader = () => {
     return (
         <div className='mx-auto w-40'>
             <Oval
-                height={80}
-                width={80}
                 color="#4fa94d"
                 wrapperStyle={{}}
                 wrapperClass=""
