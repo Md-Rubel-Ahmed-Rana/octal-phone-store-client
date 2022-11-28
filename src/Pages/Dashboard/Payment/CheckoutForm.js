@@ -30,7 +30,7 @@ const CheckoutForm = ({ phone }) => {
         }
 
         // update unpaid order to paid
-        fetch(`http://localhost:5000/orders/${phone._id}`, {
+        fetch(`https://octal-phone-server.vercel.app/orders/${phone._id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
@@ -40,13 +40,13 @@ const CheckoutForm = ({ phone }) => {
             .then((res) => res.json())
             .then(() => {
                 // delete this paid product
-                axios.delete(`http://localhost:5000/products/delete/${phone.olderId}`)
-                .then((data) => {
-                    swal("Congrates!", "Payment completed", "success");
-                    navigate("/dashboard/myorders")
-                    console.log(data);
-                })
-                
+                axios.delete(`https://octal-phone-server.vercel.app/products/delete/${phone.olderId}`)
+                    .then((data) => {
+                        swal("Congrates!", "Payment completed", "success");
+                        navigate("/dashboard/myorders")
+                        console.log(data);
+                    })
+
             })
             .catch((err) => console.log(err))
     }

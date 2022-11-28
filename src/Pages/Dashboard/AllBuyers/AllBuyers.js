@@ -11,7 +11,7 @@ const AllBuyers = () => {
     const { data: currenUser = [] } = useQuery({
         queryKey: ["users", user],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users/${user?.email}`)
+            const res = await fetch(`https://octal-phone-server.vercel.app/users/${user?.email}`)
             const data = await res.json()
             return data;
         }
@@ -21,7 +21,7 @@ const AllBuyers = () => {
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ["users", currenUser],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?role=${currenUser?.role}`)
+            const res = await fetch(`https://octal-phone-server.vercel.app/users?role=${currenUser?.role}`)
             const data = await res.json()
             return data;
         }
@@ -33,49 +33,49 @@ const AllBuyers = () => {
 
     // delete user from database
     const handleDeleteUser = (email) => {
-        fetch(`http://localhost:5000/users/${email}`, {
+        fetch(`https://octal-phone-server.vercel.app/users/${email}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
             }
         })
-        .then((res) => res.json())
-        .then(() => {
-            swal("Done", "Buyer deleted successfully", "success");
-            refetch()
-        })
-        .catch((err) => console.log(err))
+            .then((res) => res.json())
+            .then(() => {
+                swal("Done", "Buyer deleted successfully", "success");
+                refetch()
+            })
+            .catch((err) => console.log(err))
     }
 
-    if (isLoading){
+    if (isLoading) {
         return <Loader />
     }
 
     return (
-            <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            buyers.map((buyer, index) => <tr key={buyer._id}>
-                                <th>{index + 1}</th>
-                                <td>{buyer.name}</td>
-                                <td>{buyer.email}</td>
-                                <td>{buyer.role}</td>
-                                <td><button onClick={() => handleDeleteUser(buyer.email)} className='bg-red-500 px-2 py-1 text-white rounded'>Delete</button></td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
-            </div>
+        <div className="overflow-x-auto">
+            <table className="table w-full">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        buyers.map((buyer, index) => <tr key={buyer._id}>
+                            <th>{index + 1}</th>
+                            <td>{buyer.name}</td>
+                            <td>{buyer.email}</td>
+                            <td>{buyer.role}</td>
+                            <td><button onClick={() => handleDeleteUser(buyer.email)} className='bg-red-500 px-2 py-1 text-white rounded'>Delete</button></td>
+                        </tr>)
+                    }
+                </tbody>
+            </table>
+        </div>
     );
 };
 

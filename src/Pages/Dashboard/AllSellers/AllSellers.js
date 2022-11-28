@@ -8,12 +8,11 @@ import Loader from '../../../Shared/Loader/Loader';
 
 const AllSellers = () => {
     const { user } = useContext(AuthContext);
-
     // load currently logged in user
     const { data: currenUser = [] } = useQuery({
         queryKey: ["users", user],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users/${user?.email}`)
+            const res = await fetch(`https://octal-phone-server.vercel.app/users/${user?.email}`)
             const data = await res.json()
             return data;
         }
@@ -23,7 +22,7 @@ const AllSellers = () => {
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ["users", currenUser],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?role=${currenUser?.role}`)
+            const res = await fetch(`https://octal-phone-server.vercel.app/users?role=${currenUser?.role}`)
             const data = await res.json()
             return data;
         }
@@ -35,7 +34,7 @@ const AllSellers = () => {
 
     // delete user from database
     const handleDeleteUser = (email) => {
-        fetch(`http://localhost:5000/users/${email}`, {
+        fetch(`https://octal-phone-server.vercel.app/users/${email}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
@@ -52,16 +51,16 @@ const AllSellers = () => {
 
     // updated seller status in users collection
     const handleVerify = (seller) => {
-        axios.put(`http://localhost:5000/users/sellers/${seller._id}`)
-        .then(() => {
-            // update seller in products collection
-            axios.put("http://localhost:5000/products/sellers")
-            .then((data) => console.log(data))
-        })
-        .catch((err) => console.log(err))
+        axios.put(`https://octal-phone-server.vercel.app/users/sellers/${seller._id}`)
+            .then(() => {
+                // update seller in products collection
+                axios.put("https://octal-phone-server.vercel.app/products/sellers")
+                    .then((data) => console.log(data))
+            })
+            .catch((err) => console.log(err))
     }
 
-    if (isLoading){
+    if (isLoading) {
         return <Loader />
     }
 
@@ -85,7 +84,7 @@ const AllSellers = () => {
                             <td>{seller.name}</td>
                             <td>{seller.email}</td>
                             <td>{seller.role}</td>
-                            <td>{seller.isVerified ? <FaCheckCircle className='text-green-500 text-2xl' />  : <button onClick={() => handleVerify(seller)}className='bg-red-500 text-white rounded p-1'>Unverified</button> }</td>
+                            <td>{seller.isVerified ? <FaCheckCircle className='text-green-500 text-2xl' /> : <button onClick={() => handleVerify(seller)} className='bg-red-500 text-white rounded p-1'>Unverified</button>}</td>
                             <td><button onClick={() => handleDeleteUser(seller.email)} className='bg-red-500 px-2 py-1 text-white rounded'>Delete</button></td>
                         </tr>)
                     }

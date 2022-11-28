@@ -8,16 +8,16 @@ import Loader from '../../../Shared/Loader/Loader';
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
 
-    const {data: products = [], refetch, isLoading} = useQuery({
+    const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ["products", user?.email],
         queryFn: async () => {
-            if(user?.email){
-                const res = await fetch(`http://localhost:5000/myproducts/${user?.email}`)
+            if (user?.email) {
+                const res = await fetch(`https://octal-phone-server.vercel.app/myproducts/${user?.email}`)
                 const data = await res.json();
                 return data
             }
         }
-    }) 
+    })
 
     const myProducts = products.filter((product) => product.seller_email === user?.email);
 
@@ -29,34 +29,34 @@ const MyProducts = () => {
             price: advertise.resalePrice,
             seller_email: advertise.seller_email
         }
-        fetch("http://localhost:5000/seller/advertise", {
+        fetch("https://octal-phone-server.vercel.app/seller/advertise", {
             method: "POST",
             headers: {
-                "content-type":"application/json"
+                "content-type": "application/json"
             },
             body: JSON.stringify(advertiseData)
         })
-        .then((res) => res.json())
-        .then(() => {
-            swal("Done!", "Advertised successfully", "success");
-        })
-        .catch((err) => console.log(err))
+            .then((res) => res.json())
+            .then(() => {
+                swal("Done!", "Advertised successfully", "success");
+            })
+            .catch((err) => console.log(err))
     }
 
     const handleDelete = (product) => {
-        axios.delete(`http://localhost:5000/myProducts/delete/${product._id}`)
-        .then(() => {
-            axios.delete(`http://localhost:5000/advertise/delete/${product._id}`)
+        axios.delete(`https://octal-phone-server.vercel.app/myProducts/delete/${product._id}`)
             .then(() => {
-                swal("Oops!", "Product deleted successfully", "success");
-                refetch()
+                axios.delete(`https://octal-phone-server.vercel.app/advertise/delete/${product._id}`)
+                    .then(() => {
+                        swal("Oops!", "Product deleted successfully", "success");
+                        refetch()
+                    })
+                    .catch((err) => console.log(err))
             })
             .catch((err) => console.log(err))
-        })
-        .catch((err)=> console.log(err))
     }
 
-    if (isLoading){
+    if (isLoading) {
         return <Loader />
     }
 
@@ -72,9 +72,9 @@ const MyProducts = () => {
                             <h2 className="text-2xl mb-2">{product?.name}</h2>
                             <p className='mb-2'>Resale Price: {product?.resalePrice}</p>
                             <div className='flex justify-between'>
-                                <button  className='bg-blue-500 p-2 rounded text-white'>Available</button>
+                                <button className='bg-blue-500 p-2 rounded text-white'>Available</button>
                                 <button onClick={() => handleAdvertise(product)} className='bg-green-500 p-2 rounded text-white'>Advertise</button>
-                                <button onClick={() => handleDelete(product)}  className='bg-red-500 p-2 rounded text-white'>Delete</button>
+                                <button onClick={() => handleDelete(product)} className='bg-red-500 p-2 rounded text-white'>Delete</button>
                             </div>
                         </div>
                     </div>)

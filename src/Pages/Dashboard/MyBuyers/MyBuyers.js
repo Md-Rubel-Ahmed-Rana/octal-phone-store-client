@@ -3,10 +3,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MyBuyers = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [buyers, setBuyers] = useState([])
     useEffect(() => {
-        axios.get("http://localhost:5000/buyers")
+        axios.get("https://octal-phone-server.vercel.app/buyers")
             .then((data) => setBuyers(data.data))
     }, [])
 
@@ -42,7 +42,7 @@ const MyBuyers = () => {
                     </table>
 
             }
-            
+
         </div>
     );
 };

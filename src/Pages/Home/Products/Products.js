@@ -7,7 +7,7 @@ const Products = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/categories")
+        axios.get("https://octal-phone-server.vercel.app/categories")
             .then((data) => setProducts(data.data))
     }, [])
 

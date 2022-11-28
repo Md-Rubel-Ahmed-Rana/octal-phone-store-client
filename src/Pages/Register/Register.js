@@ -5,8 +5,8 @@ import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
 
 
- const Register = () => {
-     const { createUser, loginWithGoogle, logout, setUser, updateUser } = useContext(AuthContext)
+const Register = () => {
+    const { createUser, loginWithGoogle, logout, setUser, updateUser } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
 
@@ -19,23 +19,23 @@ import { useNavigate } from "react-router-dom";
                     email: data.email,
                     role: data.role
                 }
-                fetch("http://localhost:5000/users", {
+                fetch("https://octal-phone-server.vercel.app/users", {
                     method: "POST",
                     headers: {
-                        "content-type":"application/json"
+                        "content-type": "application/json"
                     },
                     body: JSON.stringify(userInfo)
                 })
-                .then((res) => res.json())
-                .then((result) => console.log(result))
-                .catch((err) => console.log(err))
+                    .then((res) => res.json())
+                    .then((result) => console.log(result))
+                    .catch((err) => console.log(err))
                 setUser(userInfo);
-                
+
                 // update user
                 updateUser(data.name)
-                .then(() => {})
+                    .then(() => { })
                     .catch((err) => swal("Oops", `${err}`, "error"))
-                
+
                 swal("Good", "Registered successfully", "success");
                 logout()
                 navigate("/login")
@@ -45,26 +45,26 @@ import { useNavigate } from "react-router-dom";
 
     const handleLoginWithGoogle = () => {
         loginWithGoogle()
-        .then((result) => {
-            const user = result.user;
-            const userInfo = {
-                name: user.displayName,
-                email: user.email,
-                role: "buyer"
-            }
-            fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify(userInfo)
+            .then((result) => {
+                const user = result.user;
+                const userInfo = {
+                    name: user.displayName,
+                    email: user.email,
+                    role: "buyer"
+                }
+                fetch("https://octal-phone-server.vercel.app/users", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then((res) => res.json())
+                    .then((result) => console.log(result))
+                    .catch((err) => console.log(err))
+                swal("Great!", "Logged in successfully", "success");
             })
-            .then((res) => res.json())
-            .then((result) => console.log(result))
             .catch((err) => console.log(err))
-            swal("Great!", "Logged in successfully", "success");
-        })
-        .catch((err) => console.log(err))
     }
 
     return (
@@ -84,7 +84,7 @@ import { useNavigate } from "react-router-dom";
                         </select>
                     </div>
                     <div>
-                        <input className="p-2 w-2/3"  type="password" {...register("password")} />
+                        <input className="p-2 w-2/3" type="password" {...register("password")} />
                     </div>
                     <div className="w-2/3 mx-auto mt-3">
                         <input className="bg-blue-800 w-full px-5 py-2 rounded text-white cursor-pointer" type="submit" value="Register" />

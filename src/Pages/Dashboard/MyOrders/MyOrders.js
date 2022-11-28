@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MyOrders = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [myOrders, setMyOrders] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:5000/myOrders?email=${user?.email}`)
-        .then((data) => setMyOrders(data.data))
+        axios.get(`https://octal-phone-server.vercel.app/myOrders?email=${user?.email}`)
+            .then((data) => setMyOrders(data.data))
     }, [user?.email])
 
 

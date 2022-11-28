@@ -41,7 +41,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/category/:id",
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`) ,
+                loader: ({ params }) => fetch(`https://octal-phone-server.vercel.app/products/${params.id}`),
                 element: <PrivateRoute> <Categories /> </PrivateRoute>
             },
         ]
@@ -65,24 +65,24 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/myproducts",
-                element: <MyProducts /> 
+                element: <MyProducts />
             },
             {
                 path: "/dashboard/mybuyers",
-                element: <MyBuyers /> 
+                element: <MyBuyers />
             },
             {
                 path: "/dashboard/myorders",
-                element: <MyOrders /> 
+                element: <MyOrders />
             },
             {
                 path: "/dashboard/mywishlist",
-                element: <MyWishlist /> 
+                element: <MyWishlist />
             },
             {
                 path: "/dashboard/payment/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/orders/${params.id}`) ,
-                element: <Payment /> 
+                loader: ({ params }) => fetch(`https://octal-phone-server.vercel.app/orders/${params.id}`),
+                element: <Payment />
             },
         ]
     }

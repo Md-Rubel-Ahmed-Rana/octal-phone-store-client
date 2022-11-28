@@ -19,11 +19,11 @@ const Login = () => {
             .then((result) => {
                 const user = result.user;
                 setUser(user)
-                
+
                 // generate a secret token;
                 handleToken(user.email)
                 swal("Great!", "Logged in successfully", "success");
-                navigate(from, {replace: true})
+                navigate(from, { replace: true })
             })
             .catch((err) => console.log(err))
     }
@@ -37,21 +37,21 @@ const Login = () => {
                     email: user.email,
                     role: "buyer"
                 }
-                fetch("http://localhost:5000/users", {
+                fetch("https://octal-phone-server.vercel.app/users", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json"
                     },
                     body: JSON.stringify(userInfo)
                 })
-                .then((res) => res.json())
-                .then(() => {
-                    handleToken(user.email)
-                    swal("Great!", "Logged in successfully", "success")
-                    navigate(from, { replace: true })
-                })
-                .catch((err) => console.log(err))
-                
+                    .then((res) => res.json())
+                    .then(() => {
+                        handleToken(user.email)
+                        swal("Great!", "Logged in successfully", "success")
+                        navigate(from, { replace: true })
+                    })
+                    .catch((err) => console.log(err))
+
             })
             .catch((err) => console.log(err))
     }

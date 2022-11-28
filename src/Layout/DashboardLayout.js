@@ -14,23 +14,23 @@ const DashboardLayout = () => {
     // check weather use has token or not
     const token = localStorage.getItem("accessToken");
     // if not token, logout this user
-    if (!token){
+    if (!token) {
         logout()
-        .then(() => {
-            navigate("/")
-        })
+            .then(() => {
+                navigate("/")
+            })
     }
 
     const { data: currenUser = [], isLoading } = useQuery({
         queryKey: ["user", user],
-        queryFn: async() => {
-            const res = await fetch(`http://localhost:5000/users/${user?.email}`)
+        queryFn: async () => {
+            const res = await fetch(`https://octal-phone-server.vercel.app/users/${user?.email}`)
             const data = await res.json()
             return data;
         }
     })
 
-    if (isLoading){
+    if (isLoading) {
         return <Loader />
     }
 
@@ -50,18 +50,18 @@ const DashboardLayout = () => {
                             currenUser.role === "admin" ? <>
                                 <li> <Link to="/dashboard/allbuyers">All Buyers</Link> </li>
                                 <li> <Link to="/dashboard/allsellers">All Sellers</Link> </li>
-                            </> : <> 
-                                    {
-                                        currenUser.role === "seller" ? <>
-                                            <li> <Link to="/dashboard/myproducts">My Products</Link> </li>
-                                            <li> <Link to="/dashboard/addProduct">Add Product</Link> </li>
-                                            <li> <Link to="/dashboard/mybuyers">My Buyers</Link> </li>
-                                        </> : <>
-                                                <li> <Link to="/dashboard/myorders">My Orders</Link> </li>
-                                                <li> <Link to="/dashboard/mywishlist">My Wishlist</Link> </li>
-                                        </>
-                                    }
-                                </> 
+                            </> : <>
+                                {
+                                    currenUser.role === "seller" ? <>
+                                        <li> <Link to="/dashboard/myproducts">My Products</Link> </li>
+                                        <li> <Link to="/dashboard/addProduct">Add Product</Link> </li>
+                                        <li> <Link to="/dashboard/mybuyers">My Buyers</Link> </li>
+                                    </> : <>
+                                        <li> <Link to="/dashboard/myorders">My Orders</Link> </li>
+                                        <li> <Link to="/dashboard/mywishlist">My Wishlist</Link> </li>
+                                    </>
+                                }
+                            </>
                         }
                     </ul>
                 </div>

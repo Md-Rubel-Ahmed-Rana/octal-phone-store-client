@@ -1,4 +1,4 @@
-import React, { useContext,   useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -8,7 +8,7 @@ import wishList from "../../images/wishlist.png"
 import Loader from '../../Shared/Loader/Loader';
 
 const Categories = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const products = useLoaderData();
     const [modalData, setModalData] = useState(null);
     const navigate = useNavigate();
@@ -27,16 +27,16 @@ const Categories = () => {
         const olderId = modalData._id
 
         // store orders data in MongoDB
-        axios.post("http://localhost:5000/orders", {
+        axios.post("https://octal-phone-server.vercel.app/orders", {
             buyerName, email, phoneName, price, phoneNumber, location, image, seller_email: modalData.seller_email, olderId
         })
-        .then(()=> {
-            swal("Great!", "Confirmed your order", "success");
-            navigate("/dashboard/myorders")
-        })
-        .catch((error) => {
+            .then(() => {
+                swal("Great!", "Confirmed your order", "success");
+                navigate("/dashboard/myorders")
+            })
+            .catch((error) => {
                 console.log(error);
-        });
+            });
 
         console.log(olderId);
         // close the modal
@@ -46,7 +46,7 @@ const Categories = () => {
     // store wishlist data in MongoDB
     const handleWishList = (product) => {
         product.userEmail = user.email;
-        axios.post("http://localhost:5000/wishlist", product )
+        axios.post("https://octal-phone-server.vercel.app/wishlist", product)
             .then(() => swal("Cool!", "Product added in your Wishlist", "success"))
     }
 
@@ -76,7 +76,7 @@ const Categories = () => {
                         </div>
                     </div>)
                 }
-            </div>            
+            </div>
             {
                 modalData && <>
                     <input type="checkbox" id="confirm-modal" className="modal-toggle" />

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const MyWishlist = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:5000/wishlist`)
+        axios.get(`https://octal-phone-server.vercel.app/wishlist`)
             .then((data) => setProducts(data.data))
     }, [])
 
