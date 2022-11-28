@@ -46,6 +46,7 @@ const Login = () => {
                 })
                 .then((res) => res.json())
                 .then(() => {
+                    handleToken(user.email)
                     swal("Great!", "Logged in successfully", "success")
                     navigate(from, { replace: true })
                 })

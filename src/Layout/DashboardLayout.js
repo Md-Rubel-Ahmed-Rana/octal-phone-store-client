@@ -1,13 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import Footer from '../Shared/Footer/Footer';
 import Navbar from '../Shared/Navbar/Navbar';
 
 
 const DashboardLayout = () => {
-    const {user} = useContext(AuthContext)
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate()
+
+    // check weather use has token or not
+    const token = localStorage.getItem("accessToken");
+    // if not token, logout this user
+    if (!token){
+        logout()
+        .then(() => {
+            navigate("/")
+        })
+    }
 
     const { data: currenUser = [] } = useQuery({
         queryKey: ["user", user],
