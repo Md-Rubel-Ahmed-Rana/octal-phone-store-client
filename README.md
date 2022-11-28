@@ -40,20 +40,20 @@
 + react-router-dom
 + sweetalert
 
-### most important things
-### Dashboard theory
- #### To check admin route
- <p>Please Login with this Email and Password</p>
- Admin Email: rubel@gamil.com
- Password: 123456
+# Most important things
+# Dashboard theory
+## To check admin route
+ + Please Login with this Email and Password
+ 1. Admin Email: rubel@gamil.com
+ 2. Password: 123456
 
- #### To check Seller route
- <p>Please Login with this Email and Password</p>
- Seller Email: stave@jobs.com
- Password: 123456
+## To check Seller route
+ + Please Login with this Email and Password
+ 1. Seller Email: stave@jobs.com
+ 2. Password: 123456
 
 
- #### To check Buyer route
- <p>Please Login with this Email and Password</p>
- Seller Email: bodrul@gmail.com
- Password: 123456
+ ## To check Buyer route
+ + Please Login with this Email and Password
+ 1. Seller Email: bodrul@gmail.com
+ 1. Password: 123456
