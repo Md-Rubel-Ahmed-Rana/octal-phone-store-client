@@ -5,7 +5,9 @@ import stave from "../../../images/stave.png"
 
 const Feedback = () => {
     return (
-        <div className='lg:flex lg:px-10 rounded-lg gap-10 bg-gray-800  py-10 my-10'>
+        <>
+        <h3 className="text-3xl text-white mt-10 text-center -mb-10">Feedbacks</h3>
+        <div className='lg:flex lg:px-10 rounded-lg gap-10 bg-gray-800  py-10 mb-10'>
             <div className='bg-gray-700 p-5 rounded-md'>
                 <img className='w-full h-60 rounded' src={allu} alt="" />
                 <h5 className='text-2xl text-center mb-2'>Allu Arjun</h5>
@@ -22,6 +24,7 @@ const Feedback = () => {
                 <p>Just, I have wondered by visiting this website. Their service to person to person is one of the best service. I really support them.</p>
             </div>
         </div>
+        </>
     );
 };
 
