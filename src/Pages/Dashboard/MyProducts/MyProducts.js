@@ -3,12 +3,12 @@ import axios from 'axios';
 import React, { useContext } from 'react';
 import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loader from '../../../Shared/Loader/Loader';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    // const [orders, setOrders] = useState([])
 
-    const {data: products = [], refetch} = useQuery({
+    const {data: products = [], refetch, isLoading} = useQuery({
         queryKey: ["products", user?.email],
         queryFn: async () => {
             if(user?.email){
@@ -19,15 +19,7 @@ const MyProducts = () => {
         }
     }) 
 
-    
-    // useEffect(() => {
-    //     axios.get("http://localhost:5000/orders")
-    //         .then((data) => setOrders(data.data))
-    // }, []);
-    
     const myProducts = products.filter((product) => product.seller_email === user?.email);
-    // const paidProduct = orders.find((order) => order.paid);
-    // const remainingProducts = myProducts.filter((product) => product.img !== paidProduct.image);
 
     const handleAdvertise = (advertise) => {
         const advertiseData = {
@@ -62,6 +54,10 @@ const MyProducts = () => {
             .catch((err) => console.log(err))
         })
         .catch((err)=> console.log(err))
+    }
+
+    if (isLoading){
+        return <Loader />
     }
 
     return (

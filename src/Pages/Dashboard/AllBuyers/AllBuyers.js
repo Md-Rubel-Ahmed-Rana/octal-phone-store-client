@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loader from '../../../Shared/Loader/Loader';
 
 const AllBuyers = () => {
     const { user } = useContext(AuthContext);
@@ -17,7 +18,7 @@ const AllBuyers = () => {
     })
 
     // send the currentUser role to get specific data
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ["users", currenUser],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/users?role=${currenUser?.role}`)
@@ -44,6 +45,10 @@ const AllBuyers = () => {
             refetch()
         })
         .catch((err) => console.log(err))
+    }
+
+    if (isLoading){
+        return <Loader />
     }
 
     return (

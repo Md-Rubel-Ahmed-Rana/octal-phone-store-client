@@ -10,8 +10,7 @@ const MyBuyers = () => {
             .then((data) => setBuyers(data.data))
     }, [])
 
-    const myBuyers = buyers.filter((buyer) => buyer.seller_email === user?.email);
-    console.log(myBuyers);
+    const myBuyers = buyers.filter((buyer) => buyer.seller_email === user?.email);;
 
     return (
         <div className="overflow-x-auto">

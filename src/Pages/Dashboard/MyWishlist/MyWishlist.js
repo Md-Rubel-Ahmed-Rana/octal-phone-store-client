@@ -9,7 +9,6 @@ const MyWishlist = () => {
             .then((data) => setProducts(data.data))
     }, [])
 
-
     return (
         <div>
             <div className="overflow-x-auto">

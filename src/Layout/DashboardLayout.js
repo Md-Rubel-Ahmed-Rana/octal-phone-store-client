@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import Footer from '../Shared/Footer/Footer';
+import Loader from '../Shared/Loader/Loader';
 import Navbar from '../Shared/Navbar/Navbar';
 
 
@@ -20,7 +21,7 @@ const DashboardLayout = () => {
         })
     }
 
-    const { data: currenUser = [] } = useQuery({
+    const { data: currenUser = [], isLoading } = useQuery({
         queryKey: ["user", user],
         queryFn: async() => {
             const res = await fetch(`http://localhost:5000/users/${user?.email}`)
@@ -28,6 +29,10 @@ const DashboardLayout = () => {
             return data;
         }
     })
+
+    if (isLoading){
+        return <Loader />
+    }
 
     return (
         <div>
