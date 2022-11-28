@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Loader from '../../../Shared/Loader/Loader';
 
 const MyWishlist = () => {
     const [products, setProducts] = useState([]);
@@ -10,11 +9,12 @@ const MyWishlist = () => {
             .then((data) => setProducts(data.data))
     }, [])
 
+
     return (
         <div>
             <div className="overflow-x-auto">
                 {
-                    products.length === 0 ? <Loader /> : <table className="table w-full">
+                    products.length === 0 ? <h3 className='text-3xl'>You have no Wishlists</h3> : <table className="table w-full">
                         <thead>
                             <tr>
                                 <th></th>

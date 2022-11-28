@@ -2,10 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import Loader from '../../../Shared/Loader/Loader';
 
 const AllBuyers = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+
+    // load currently logged in user
     const { data: currenUser = [] } = useQuery({
         queryKey: ["users", user],
         queryFn: async () => {
@@ -15,6 +16,7 @@ const AllBuyers = () => {
         }
     })
 
+    // send the currentUser role to get specific data
     const { data: users = [], refetch } = useQuery({
         queryKey: ["users", currenUser],
         queryFn: async () => {
@@ -23,9 +25,12 @@ const AllBuyers = () => {
             return data;
         }
     })
+
+    // select only buyers form all users
     const buyers = users.filter((user) => user.role === "buyer");
 
 
+    // delete user from database
     const handleDeleteUser = (email) => {
         fetch(`http://localhost:5000/users/${email}`, {
             method: "DELETE",
@@ -39,10 +44,6 @@ const AllBuyers = () => {
             refetch()
         })
         .catch((err) => console.log(err))
-    }
-
-    if (buyers.length === 0){
-        <Loader />
     }
 
     return (

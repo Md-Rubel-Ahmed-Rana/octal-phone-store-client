@@ -32,7 +32,7 @@ const AddProduct = () => {
                 } else if (data.name.toLowerCase().includes("huawei")) {
                     categoryId = "4"
                 }else{
-                    return swal("Sorry", "Your brand is not allowed. Try with Apple Samsung Oppo and Huawei", "warning");
+                    return swal("Sorry", "Your brand is not allowed. Try with iPhone or Samsung or Oppo or Huawei", "warning");
                 }
 
                 const name = data.name
@@ -43,11 +43,11 @@ const AddProduct = () => {
                 const usedTime = data.usedTime
                 const postedTime = data.postedTime
                 const sellerName = data.sellerName
-                const sellerEmail = data.sellerEmail
+                const seller_email = data.sellerEmail
                 const condition = data.condition
 
 
-                const product = { name, category_id: categoryId, img, location, originalPrice, resalePrice, usedTime, postedTime, seller: sellerName, sellerEmail, isVerified: false, condition }
+                const product = { name, category_id: categoryId, img, location, originalPrice, resalePrice, usedTime, postedTime, seller: sellerName, seller_email, isVerified: false, condition }
 
                 fetch("http://localhost:5000/products", {
                     method: "POST",

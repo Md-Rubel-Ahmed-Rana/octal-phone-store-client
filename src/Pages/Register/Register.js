@@ -30,18 +30,17 @@ import { useNavigate } from "react-router-dom";
                 .then((result) => console.log(result))
                 .catch((err) => console.log(err))
                 setUser(userInfo);
+                
                 // update user
                 updateUser(data.name)
-                .then((result) => {
-                    console.log(result.user);
-                })
-                .catch((err) => console.log(err))
+                .then(() => {})
+                    .catch((err) => swal("Oops", `${err}`, "error"))
                 
                 swal("Good", "Registered successfully", "success");
                 logout()
                 navigate("/login")
             })
-            .catch((err) => console.log(err))
+            .catch((err) => swal("Oops", `${err.message}`, "error"))
     }
 
     const handleLoginWithGoogle = () => {

@@ -1,10 +1,11 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-// import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 
 const CheckoutForm = ({ phone }) => {
+    console.log(phone);
     const navigate = useNavigate()
     const stripe = useStripe();
     const elements = useElements()
@@ -28,17 +29,24 @@ const CheckoutForm = ({ phone }) => {
             return;
         }
 
+        // update unpaid order to paid
         fetch(`http://localhost:5000/orders/${phone._id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
             },
-            body: JSON.stringify({ transactionId: paymentMethod.id })
+            body: JSON.stringify({ transactionId: paymentMethod.id, id: phone._id })
         })
             .then((res) => res.json())
             .then(() => {
-                swal("Congrates!", "Payment completed", "success");
-                navigate("/dashboard/myorders")
+                // delete this paid product
+                axios.delete(`http://localhost:5000/products/delete/${phone.olderId}`)
+                .then((data) => {
+                    swal("Congrates!", "Payment completed", "success");
+                    navigate("/dashboard/myorders")
+                    console.log(data);
+                })
+                
             })
             .catch((err) => console.log(err))
     }

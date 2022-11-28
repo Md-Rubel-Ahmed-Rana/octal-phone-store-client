@@ -4,10 +4,11 @@ import React, { useContext } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import swal from 'sweetalert';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import Loader from '../../../Shared/Loader/Loader';
 
 const AllSellers = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+
+    // load currently logged in user
     const { data: currenUser = [] } = useQuery({
         queryKey: ["users", user],
         queryFn: async () => {
@@ -17,6 +18,7 @@ const AllSellers = () => {
         }
     })
 
+    // send the currentUser role to get specific data
     const { data: users = [], refetch } = useQuery({
         queryKey: ["users", currenUser],
         queryFn: async () => {
@@ -26,9 +28,11 @@ const AllSellers = () => {
         }
     })
 
+    // sellect only sellers from all users
     const sellers = users.filter((user) => user.role === "seller");
 
 
+    // delete user from database
     const handleDeleteUser = (email) => {
         fetch(`http://localhost:5000/users/${email}`, {
             method: "DELETE",
@@ -45,7 +49,7 @@ const AllSellers = () => {
     }
 
 
-    // updated seller in users collection
+    // updated seller status in users collection
     const handleVerify = (seller) => {
         axios.put(`http://localhost:5000/users/sellers/${seller._id}`)
         .then(() => {
@@ -54,10 +58,6 @@ const AllSellers = () => {
             .then((data) => console.log(data))
         })
         .catch((err) => console.log(err))
-    }
-
-    if (sellers.length === 0) {
-        return <Loader />
     }
 
     return (

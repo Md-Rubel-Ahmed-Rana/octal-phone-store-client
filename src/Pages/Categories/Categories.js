@@ -1,4 +1,4 @@
-import React, { useContext,  useState } from 'react';
+import React, { useContext,   useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -24,10 +24,11 @@ const Categories = () => {
         const phoneNumber = form.number.value;
         const location = form.location.value;
         const image = form.img.value;
+        const olderId = modalData._id
 
         // store orders data in MongoDB
         axios.post("http://localhost:5000/orders", {
-            buyerName, email, phoneName, price, phoneNumber, location, image
+            buyerName, email, phoneName, price, phoneNumber, location, image, seller_email: modalData.seller_email, olderId
         })
         .then(()=> {
             swal("Great!", "Confirmed your order", "success");
@@ -37,6 +38,7 @@ const Categories = () => {
                 console.log(error);
         });
 
+        console.log(olderId);
         // close the modal
         setModalData(null)
     }

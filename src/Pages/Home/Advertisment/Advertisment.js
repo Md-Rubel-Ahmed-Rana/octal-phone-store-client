@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 
 const Advertisment = () => {
     const [advertises, setAdvertises] = useState([])
+
     useEffect(() => {
         axios.get("http://localhost:5000/advertises")
             .then((data) => setAdvertises(data.data))
-    }, )
+    }, []);
+
     return (
         <div>
             {
@@ -15,7 +17,7 @@ const Advertisment = () => {
                 {
                     advertises.map((advertise) => <div className='relative w-full'>
                         <img className='rounded w-full h-60' src={advertise.image} alt="" />
-                        <h3 className='absolute top-28 lg:rotate-45 text-4xl text-black'>{advertise.name}</h3>
+                        <h3 className='absolute top-28 lg:rotate-45 text-4xl bg-green-500 p-2 text-black'>{advertise.name}</h3>
                     </div>)
                 }
                 </div>

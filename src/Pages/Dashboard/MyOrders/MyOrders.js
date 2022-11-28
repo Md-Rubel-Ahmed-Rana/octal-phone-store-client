@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import Loader from '../../../Shared/Loader/Loader';
 
 const MyOrders = () => {
     const {user} = useContext(AuthContext)
@@ -16,7 +15,7 @@ const MyOrders = () => {
         <div>
             <div className="overflow-x-auto">
                 {
-                    myOrders.length === 0 ? <Loader /> : <table className="table w-full">
+                    myOrders.length === 0 ? <h4 className="text-2xl">There is Orders added yet</h4> : <table className="table w-full">
                         <thead>
                             <tr>
                                 <th></th>
