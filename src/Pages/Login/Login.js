@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useToken from "../../hooks/useToken";
 
 
 const Login = () => {
@@ -10,7 +11,8 @@ const Login = () => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/"
+    const from = location.state?.from?.pathname || "/";
+    const handleToken = useToken()
 
     const onSubmit = (data) => {
         loginUser(data.email, data.password)
@@ -18,13 +20,9 @@ const Login = () => {
                 const user = result.user;
                 setUser(user)
                 
-                // generate a secret token 
-                fetch(`http://localhost:5000/jwt?email=${user.email}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    localStorage.setItem("accessToken", data.accessToken)
-                    swal("Great!", "Logged in successfully", "success");
-                })
+                // generate a secret token;
+                handleToken(user.email)
+                swal("Great!", "Logged in successfully", "success");
                 navigate(from, {replace: true})
             })
             .catch((err) => console.log(err))

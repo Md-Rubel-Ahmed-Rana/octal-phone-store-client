@@ -6,6 +6,7 @@ import Loader from '../Shared/Loader/Loader';
 const PrivateRoute = ({children}) => {
     const { user, loading } = useContext(AuthContext);
     const location = useLocation();
+    
 
     if (loading){
         return <Loader />
@@ -14,6 +15,8 @@ const PrivateRoute = ({children}) => {
    if(!user && !user?.email){
         return <Navigate to="/login" state={{from: location}} replace />
     }
+
+
     return children
 
 };
