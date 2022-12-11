@@ -3,12 +3,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken";
 
 
 const Register = () => {
-    const { createUser, loginWithGoogle, logout, setUser, updateUser } = useContext(AuthContext)
+    const { createUser, loginWithGoogle, setUser, updateUser } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const handleToken = useToken()
 
 
     const handleRegister = (data) => {
@@ -29,16 +31,18 @@ const Register = () => {
                     .then((res) => res.json())
                     .then((result) => console.log(result))
                     .catch((err) => console.log(err))
-                setUser(userInfo);
+                    setUser(userInfo);
+                    handleToken(data.email)
+                    navigate("/");
+                    window.location.reload()
 
                 // update user
                 updateUser(data.name)
                     .then(() => { })
                     .catch((err) => swal("Oops", `${err}`, "error"))
-
+                
                 swal("Good", "Registered successfully", "success");
-                logout()
-                navigate("/login")
+               
             })
             .catch((err) => swal("Oops", `${err.message}`, "error"))
     }

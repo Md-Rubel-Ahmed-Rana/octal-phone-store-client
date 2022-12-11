@@ -23,13 +23,13 @@ const AddProduct = () => {
             .then((imgData) => {
                 if (imgData.success) {
                     let categoryId = "";
-                    if (data.name.toLowerCase().includes("samsung")) {
+                    if (data.category==="samsung") {
                         categoryId = "1"
-                    } else if (data.name.toLowerCase().includes("oppo")) {
+                    } else if (data.category === "oppo") {
                         categoryId = "2"
-                    } else if (data.name.toLowerCase().includes("iphone")) {
+                    } else if (data.category === "iphone") {
                         categoryId = "3"
-                    } else if (data.name.toLowerCase().includes("huawei")) {
+                    } else if (data.category === "huawei") {
                         categoryId = "4"
                     } else {
                         return swal("Sorry", "Your brand is not allowed. Try with iPhone or Samsung or Oppo or Huawei", "warning");
@@ -68,6 +68,15 @@ const AddProduct = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} >
             <div className="grid lg:grid-cols-2 gap-2">
+                <div>
+                    <select className="p-2 w-full border" type="text" {...register("category")} id="category">
+                        <option disabled>Select One</option>
+                        <option value="samsung">samsung</option>
+                        <option value="iphone">Iphone</option>
+                        <option value="oppo">Oppo</option>
+                        <option value="huawei">Huawei</option>
+                    </select>
+                </div>
                 <div>
                     <input placeholder='Product Name (Samsung 10)' className="p-2 w-full border" type="text" {...register("name")} />
                 </div>
