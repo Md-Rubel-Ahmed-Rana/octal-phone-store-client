@@ -61,7 +61,7 @@ const AddProduct = () => {
                             swal("Great!", "Product added successfully", "success");
                             navigate("/dashboard/myproducts")
                         })
-                        .catch((err) => console.log(err))
+                        .catch((err) => swal("Opps!", `${err.message}`, "error"))
                 }
             })
     }
@@ -69,7 +69,7 @@ const AddProduct = () => {
         <form onSubmit={handleSubmit(onSubmit)} >
             <div className="grid lg:grid-cols-2 gap-2">
                 <div>
-                    <select className="p-2 w-full border" type="text" {...register("category")} id="category">
+                    <select className="p-2 w-full border" type="text" {...register("category", {required: true})} id="category">
                         <option disabled>Select One</option>
                         <option value="samsung">samsung</option>
                         <option value="iphone">Iphone</option>
@@ -78,34 +78,34 @@ const AddProduct = () => {
                     </select>
                 </div>
                 <div>
-                    <input placeholder='Product Name (Samsung 10)' className="p-2 w-full border" type="text" {...register("name")} />
+                    <input placeholder='Product Name (Samsung 10)' className="p-2 w-full border" type="text" {...register("name", { required: true })} />
                 </div>
                 <div>
-                    <input className="p-2 w-full  border" type="file" {...register("image")} />
+                    <input className="p-2 w-full  border" type="file" {...register("image", { required: true })} />
                 </div>
                 <div>
-                    <input placeholder='Location' className="p-2 w-full border" type="text" {...register("location")} />
+                    <input placeholder='Location' className="p-2 w-full border" type="text" {...register("location", { required: true })} />
                 </div>
                 <div>
-                    <input placeholder='Original Price' className="p-2 w-full border" type="text" {...register("originalPrice")} />
+                    <input placeholder='Original Price' className="p-2 w-full border" type="text" {...register("originalPrice", { required: true })} />
                 </div>
                 <div>
-                    <input placeholder='Resale Price' className="p-2 w-full border" type="text" {...register("resalePrice")} />
+                    <input placeholder='Resale Price' className="p-2 w-full border" type="text" {...register("resalePrice", { required: true })} />
                 </div>
                 <div>
-                    <input placeholder='Used Time' className="p-2 w-full border" type="text" {...register("usedTime")} />
+                    <input placeholder='Used Time' className="p-2 w-full border" type="text" {...register("usedTime", { required: true })} />
                 </div>
                 <div>
-                    <input placeholder='Today Date (dd-mm-yyyy)' className="p-2 w-full border" type="text" {...register("postedTime")} />
+                    <input placeholder='Today Date (dd-mm-yyyy)' className="p-2 w-full border" type="text" {...register("postedTime", { required: true })} />
                 </div>
                 <div>
-                    <input defaultValue={user?.displayName} placeholder='Seller Name' className="p-2 w-full border" type="text" {...register("sellerName")} />
+                    <input defaultValue={user?.displayName} placeholder='Seller Name' className="p-2 w-full border" type="text" {...register("sellerName", { required: true })} />
                 </div>
                 <div>
-                    <input defaultValue={user?.email} placeholder='Seller Email' className="p-2 w-full border" type="text" {...register("sellerEmail")} readOnly />
+                    <input defaultValue={user?.email} placeholder='Seller Email' className="p-2 w-full border" type="text" {...register("sellerEmail", { required: true })} readOnly />
                 </div>
                 <div>
-                    <input placeholder='Condition {excelent or good or fair}' className="p-2 w-full border" type="text" {...register("condition")} />
+                    <input placeholder='Condition {excelent or good or fair}' className="p-2 w-full border" type="text" {...register("condition", { required: true })} />
                 </div>
             </div>
             <div className="w-full mx-auto mt-3 lg:mb-5 mb-20 block text-center">
