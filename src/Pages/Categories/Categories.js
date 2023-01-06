@@ -4,7 +4,6 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { AuthContext } from '../../contexts/AuthProvider';
 import swal from 'sweetalert';
 import axios from 'axios';
-import wishList from "../../images/wishlist.png"
 import Loader from '../../Shared/Loader/Loader';
 
 const Categories = () => {
@@ -35,10 +34,9 @@ const Categories = () => {
                 navigate("/dashboard/myorders")
             })
             .catch((error) => {
-                console.log(error);
+                swal("Opps!", `${error.message}`, "error")
             });
 
-        console.log(olderId);
         // close the modal
         setModalData(null)
     }
@@ -51,26 +49,28 @@ const Categories = () => {
     }
 
     return (
-        <div className='bg-black lg:px-20 py-10 relative'>
-            <div className='grid  lg:grid-cols-3 gap-10'>
+        <div className='lg:px-10 py-10 relative'>
+            <div className='grid  lg:grid-cols-3 gap-3'>
                 {
-                    products.length === 0 ? <Loader /> : products.map((product, index) => <div className='rounded-md w-full m-1 bg-gray-800 p-4 gap-3 text-white' key={index}>
+                    products.length === 0 ? <Loader /> : products.map((product, index) => <div className='rounded-md w-full bg-[#F2f2f2] m-1 p-4 gap-3 ' key={index}>
                         <div className='mb-4'>
                             <img className='h-48 rounded w-full' src={product.img} alt="" />
                         </div>
                         <div>
-                            <h2 className="text-2xl text-white mb-2">{product?.name}</h2>
-                            <p className='mb-1'>Original Price: {product?.originalPrice}</p>
-                            <p className='mb-2'>Resale Price: {product?.resalePrice}</p>
-                            <p className='mb-2'>Used Time: {product?.usedTime}</p>
-                            <p className='mb-2'>Condition: {product?.condition}</p>
-                            <p className='mb-2'>Post: {product?.postedTime}</p>
-                            <p className='mb-2'>Location: {product?.location}</p>
-                            <div className='mb-2 flex items-center gap-4'> <span>Seller: {product?.seller}</span> <span>{product?.isVerified ? <span ><FaCheckCircle className='text-green-500' /></span> : <FaTimesCircle className='text-red-500' />}</span> </div>
+                            <h2 className="text-2xl mb-2 text-center">{product?.name}</h2>
+                            <div className='grid grid-cols-2'>
+                                <p className='mb-1'><strong>Original Price</strong>: {product?.originalPrice}TK</p>
+                                <p className='mb-2'><strong>Resale Price:</strong> {product?.resalePrice}TK</p>
+                                <p className='mb-2'><strong>Used Time:</strong> {product?.usedTime}</p>
+                                <p className='mb-2'><strong>Condition:</strong> {product?.condition}</p>
+                                <p className='mb-2'><strong>Post:</strong> {product?.postedTime}</p>
+                                <p className='mb-2'><strong>Location: </strong>{product?.location}</p>
+                            </div>
+                            <div className='mb-2 flex items-center gap-4'> <span><strong>Seller:</strong> {product?.seller}</span> <span>{product?.isVerified ? <span ><FaCheckCircle className='text-green-500' /></span> : <FaTimesCircle className='text-red-500' />}</span> </div>
                             <div className='flex justify-between items-center'>
-                                <button onClick={() => setModalData(product)} ><label htmlFor="confirm-modal" className="btn">Buy Now</label></button>
+                                <button onClick={() => setModalData(product)} ><label htmlFor="confirm-modal" className="btn btn-primary">Buy Now</label></button>
                                 <div>
-                                    <img onClick={() => handleWishList(product)} className='h-8 w-10 rounded cursor-pointer' src={wishList} alt="" />
+                                    <button onClick={() => handleWishList(product)}><label htmlFor="confirm-modal" className="btn btn-primary">Add to Wishlist</label></button>
                                 </div>
                             </div>
                         </div>
@@ -81,27 +81,27 @@ const Categories = () => {
                 modalData && <>
                     <input type="checkbox" id="confirm-modal" className="modal-toggle" />
                     <div className="modal modal-bottom text-black sm:modal-middle">
-                        <div className="modal-box bg-teal-500">
+                        <div className="modal-box bg-white">
                             <form onSubmit={handleConfirmation} className='text-center'>
-                                <input className='p-2 w-full' defaultValue={user?.displayName} type="text" name="buyerName" id="buyerName" readOnly />
+                                <input className='p-2 w-full border' defaultValue={user?.displayName} type="text" name="buyerName" id="buyerName" readOnly />
                                 <br />
                                 <br />
-                                <input className='p-2 w-full' defaultValue={user?.email} type="email" name="email" id="email" readOnly />
+                                <input className='p-2 w-full border' defaultValue={user?.email} type="email" name="email" id="email" readOnly />
                                 <br />
                                 <br />
-                                <input className='p-2 w-full' defaultValue={modalData?.name} type="text" name="phone" id="phone" readOnly />
+                                <input className='p-2 w-full border' defaultValue={modalData?.name} type="text" name="phone" id="phone" readOnly />
                                 <br />
                                 <br />
-                                <input className='p-2 w-full' defaultValue={modalData?.resalePrice} type="text" name="price" id="price" readOnly />
+                                <input className='p-2 w-full border' defaultValue={modalData?.resalePrice} type="text" name="price" id="price" readOnly />
                                 <br />
                                 <br />
-                                <input className='p-2 w-full' defaultValue={modalData.img} type="text" name="img" id="img" readOnly />
+                                <input className='p-2 w-full border' defaultValue={modalData.img} type="text" name="img" id="img" readOnly />
                                 <br />
                                 <br />
-                                <input className='p-2 w-full' name='number' id='number' type="text" placeholder='Phone Number' required />
+                                <input className='p-2 w-full border' name='number' id='number' type="text" placeholder='Phone Number' required />
                                 <br />
                                 <br />
-                                <input className='p-2 w-full' name='location' id='location' type="text" placeholder='Your Location' required />
+                                <input className='p-2 w-full border' name='location' id='location' type="text" placeholder='Your Location' required />
                                 <div className='flex justify-between items-center'>
                                     <div className="modal-action text-center">
                                         <label htmlFor="confirm-modal" className="btn">Cancel</label>

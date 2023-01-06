@@ -14,8 +14,9 @@ const Navbar = () => {
             navigate("/")
         })
     }
+    // 
     return (
-        <div className='lg:flex justify-between items-center lg:px-20 py-2 px-4 bg-blue-800 text-white'>
+        <div className='lg:flex bg-[#F2f2f2] justify-between items-center lg:px-20 py-2 '>
             <div className='flex items-center justify-center gap-3'>
                 <Link to="/">
                     <img className='w-14 h-14 rounded-full' src={logo} alt="logo" />

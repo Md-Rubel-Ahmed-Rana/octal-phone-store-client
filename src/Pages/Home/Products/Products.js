@@ -12,14 +12,38 @@ const Products = () => {
     }, [])
 
     return (
-        <div className='py-5 bg-gray-800 my-5 rounded-md'>
+        <div className='py-5 my-16 px-40 rounded-md'>
             <h3 className="text-2xl text-center mb-5">Select your best Brand</h3>
-            <div className='lg:flex px-5 gap-10 mx-auto text-center'>
+            <div className='grid grid-cols-2 gap-10 text-center mx-auto'>
                 {
-                    products.length === 0 ? <Loader /> : products.map((product) => <Link to={`/category/${product.category_id}`} key={product._id}> <div className='shadow-xl bg-slate-600 p-3 m-3 rounded cursor-pointer animate__animated animate__fadeInLeft'>
-                        <img className='h-40 lg:w-60 w-full rounded' src={product.img} alt="" />
-                        <h3 className="text-2xl text-white">{product.name}</h3>
-                    </div></Link>)
+                    products.length === 0 ? <Loader /> : products.map((product) => <div key={product._id} className="card bg-[#F2f2f2] shadow-xl">
+                            <figure className="px-10 pt-10">
+                                <img src={product.img} alt="category" className="rounded-xl w-full h-40" />
+                            </figure>
+                            <div className="card-body items-center text-center">
+                                <h2 className="card-title">{product.name}</h2>
+                                <div className='flex gap-5'>
+                                <div className="stats shadow">
+                                    <div className="stat">
+                                        <div className="stat-title">Total customer</div>
+                                        <div className="stat-value">50,00</div>
+                                    </div>
+                                </div>
+                                <div className="stats shadow">
+                                    <div className="stat">
+                                        <div className="stat-title">Order Placed</div>
+                                        <div className="stat-value">4,000</div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div className="card-actions">
+                                    <Link to={`/category/${product.category_id}`}>
+                                    <button className="btn btn-primary">Explore More</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                     )
                 }
             </div>
         </div>

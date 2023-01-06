@@ -6,8 +6,10 @@ import Navbar from '../Shared/Navbar/Navbar';
 const Main = () => {
     return (
         <div>
-            <Navbar />
-            <Outlet />
+            <div className='max-w-[1440px] mx-auto'>
+                <Navbar />
+                <Outlet />
+            </div>
             <Footer />
         </div>
     );

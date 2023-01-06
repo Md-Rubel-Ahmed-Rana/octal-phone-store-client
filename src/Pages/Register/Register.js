@@ -72,29 +72,29 @@ const Register = () => {
     }
 
     return (
-        <div className="bg-black lg:py-10">
-            <div className="lg:w-1/2 bg-gray-800 mx-auto text-center lg:px-20 py-10 rounded-md">
+        <div className="lg:py-10">
+            <div className="lg:w-1/2  bg-[#F2f2f2] mx-auto text-center lg:px-20 py-10 rounded-md">
                 <form onSubmit={handleSubmit(handleRegister)}>
                     <div className="mb-3">
-                        <input className="p-2 lg:w-2/3 w-full rounded" {...register("name", {required: true})} placeholder="Enter name" />
+                        <input className="p-2 lg:w-2/3 w-full border rounded" {...register("name", {required: true})} placeholder="Enter name" />
                     </div>
                     <div className="mb-3">
-                        <input className="p-2 lg:w-2/3 w-full rounded" type="email" {...register("email", { required: true })} placeholder="Enter email" />
+                        <input className="p-2 lg:w-2/3 w-full border rounded" type="email" {...register("email", { required: true })} placeholder="Enter email" />
                     </div>
                     <div className="mb-3">
-                        <select className="p-2 lg:w-2/3 w-full rounded" {...register("role", {required: true})}>
+                        <select className="p-2 lg:w-2/3 w-full border rounded" {...register("role", {required: true})}>
                             <option value="buyer">buyer</option>
                             <option value="seller">seller</option>
                         </select>
                     </div>
                     <div>
-                        <input className="p-2 lg:w-2/3 w-full rounded" type="password" {...register("password", { required: true })} placeholder="Enter password" />
+                        <input className="p-2 lg:w-2/3 border w-full rounded" type="password" {...register("password", { required: true })} placeholder="Enter password" />
                     </div>
                     <div className="lg:w-2/3 w-full mx-auto mt-3">
-                        <input className="bg-blue-800 w-full px-5 py-2 rounded text-white cursor-pointer" type="submit" value="Register" />
+                        <button className="btn btn-primary w-full px-5 py-2 rounded" type="submit">Register</button>
                     </div>
                 </form>
-                <button onClick={handleLoginWithGoogle} className="text-white mt-4 cursor-pointer bg-gray-600 py-2 border rounded-xl lg:w-2/3 w-full mx-auto px-10">Login with Google</button>
+                <button onClick={handleLoginWithGoogle} className="text-white mt-4 btn btn-primary py-2  rounded lg:w-2/3 w-full mx-auto px-10">Login with Google</button>
             </div>
         </div>
     );
