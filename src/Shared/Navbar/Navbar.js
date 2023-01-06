@@ -25,7 +25,7 @@ const Navbar = () => {
                     <h2 className='text-2xl font-bold'>Octal Phone Store</h2> 
                  </Link>
             </div>
-            <div>
+            <div className='text-center'>
                 <ul className='lg:flex lg:gap-4 grid gap-2'>
                     <li> <Link to="/">Home</Link> </li>
                     <li> <Link to="/blogs">Blogs</Link> </li>
