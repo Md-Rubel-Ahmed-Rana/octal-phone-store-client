@@ -8,7 +8,7 @@ const Feedback = () => {
         <div className='my-20'>
         <h3 className="text-3xl my-5 text-center">Customers Feedback</h3>
         <div className='lg:flex lg:px-10 rounded-lg gap-10  mb-10'>
-                <div className='card bg-[#F2f2f2] shadow-xl p-5 rounded-md'>
+                <div className='card bg-[#F2f2f2] shadow-xl p-5 m-4 rounded-md'>
                 <p>"HI guys, This is a wonderfull website from where I have bought my best branded mobile. They provide the world class service".</p>
                     <div className='flex items-center justify-between'>
                         <div className='flex items-center gap-4'>
@@ -24,7 +24,7 @@ const Feedback = () => {
                         </div>
                     </div>
             </div>
-                <div className='card bg-[#F2f2f2] shadow-xl p-5 rounded-md'>
+                <div className='card m-4 bg-[#F2f2f2] shadow-xl p-5 rounded-md'>
                     
                 <p>"Hello everyone, This is my favourite website. Sometimes I come here to buy my best branded mobile. Their services are very impressive".</p>
                     <div className='flex items-center justify-between'>
@@ -41,7 +41,7 @@ const Feedback = () => {
                         </div>
                     </div>
             </div>
-                <div className='card bg-[#F2f2f2] shadow-xl p-5 rounded-md'>
+                <div className='card m-4 bg-[#F2f2f2] shadow-xl p-5 rounded-md'>
                     <p>"Just, I have wondered by visiting this website. Their service to person to person is one of the best service. I really support them".</p>
                     <div className='flex items-center justify-between'>
                         <div className='flex items-center gap-4'>

@@ -12,9 +12,9 @@ const Products = () => {
     }, [])
 
     return (
-        <div className='py-5 my-16 px-40 rounded-md'>
+        <div className='py-5 my-16 lg:px-40 rounded-md'>
             <h3 className="text-2xl text-center mb-5">Select your best Brand</h3>
-            <div className='grid grid-cols-2 gap-10 text-center mx-auto'>
+            <div className='grid lg:grid-cols-2  gap-10 text-center mx-auto'>
                 {
                     products.length === 0 ? <Loader /> : products.map((product) => <div key={product._id} className="card bg-[#F2f2f2] shadow-xl">
                             <figure className="px-10 pt-10">
